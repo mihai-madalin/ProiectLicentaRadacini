@@ -1,6 +1,8 @@
 from db import db
+from flask_login import UserMixin
 
-class Utilizator(db.Model):
+
+class Utilizator(db.Model,UserMixin):
     __tablename__ = 'utilizatori'
 
     codUtilizator = db.Column(db.Integer, primary_key=True)
@@ -36,3 +38,5 @@ class Utilizator(db.Model):
             'numarActIdentate': self.numarActIdentate,
             'reseteazaParola': self.reseteazaParola,
         }
+    def get_id(self):
+        return self.codUtilizator

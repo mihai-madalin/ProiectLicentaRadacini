@@ -1,0 +1,18 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Login</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="parola" class="form-label">Password</label>
+            <input type="password" class="form-control" id="parola" name="parola" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+{% endblock %}

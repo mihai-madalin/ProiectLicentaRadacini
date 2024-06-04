@@ -1,0 +1,42 @@
+{% extends "/components/base_user.html" %}
+{% block title %} Register {% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Register</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="parola" class="form-label">Password</label>
+            <input type="password" class="form-control" id="parola" name="parola" required>
+        </div>
+        <div class="mb-3">
+            <label for="rol" class="form-label">Role</label>
+            <input type="number" class="form-control" id="rol" name="rol" required>
+        </div>
+        <div class="mb-3">
+            <label for="nume" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="nume" name="nume" required>
+        </div>
+        <div class="mb-3">
+            <label for="prenume" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="prenume" name="prenume" required>
+        </div>
+        <div class="mb-3">
+            <label for="serieActIdentitate" class="form-label">ID Series</label>
+            <input type="text" class="form-control" id="serieActIdentitate" name="serieActIdentitate">
+        </div>
+        <div class="mb-3">
+            <label for="numarActIdentate" class="form-label">ID Number</label>
+            <input type="text" class="form-control" id="numarActIdentate" name="numarActIdentate" required>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="reseteazaParola" name="reseteazaParola">
+            <label class="form-check-label" for="reseteazaParola">Reset Password</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+{% endblock %}

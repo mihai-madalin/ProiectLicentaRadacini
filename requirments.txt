@@ -1,3 +1,5 @@
 flask
+flask-login
+faker
 sqlalchemy
 mysql-connector-python
