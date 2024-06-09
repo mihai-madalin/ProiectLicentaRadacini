@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request
 from flask_login import LoginManager, login_required
 from db import db
-from routes import user_bp
+from blueprints.user import user_bp
 
 from models.utilizatori import Utilizator
 
@@ -33,13 +33,6 @@ def homePage():
     db.session.add(user)
     db.session.commit()
     return render_template("/pages/index.html")
-
-@app.route("/users")
-@login_required
-def list_users():
-    page = request.args.get('page', 1, type=int)
-    users = Utilizator.query.paginate(page=page, per_page=10)
-    return render_template("/pages/users.html", users=users)
 
 @login_manager.user_loader
 def load_user(user_id):

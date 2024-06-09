@@ -35,8 +35,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    <button class="btn btn-primary">Editează</button>
-                    <button class="btn btn-danger">Sterge</button>
+                    <a href="{{ url_for('user.edit_user', user_id=user.codUtilizator) }}" class="btn btn-primary">Editează</a>
+                    <a href="{{ url_for('user.remove_user', user_id=user.codUtilizator) }}" class="btn btn-danger">Sterge</a>
                 </td>
             </tr>
             {% endfor %}
@@ -47,7 +47,7 @@
         <ul class="pagination">
             {% if users.has_prev %}
             <li class="page-item">
-                <a class="page-link" href="{{ url_for('list_users', page=users.prev_num) }}" aria-label="Previous">
+                <a class="page-link" href="{{ url_for('user.list_users', page=users.prev_num) }}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -61,7 +61,7 @@
             {% for page_num in users.iter_pages() %}
             {% if page_num %}
             <li class="page-item {% if users.page == page_num %}active{% endif %}">
-                <a class="page-link" href="{{ url_for('list_users', page=page_num) }}">{{ page_num }}</a>
+                <a class="page-link" href="{{ url_for('user.list_users', page=page_num) }}">{{ page_num }}</a>
             </li>
             {% else %}
             <li class="page-item disabled">
@@ -71,7 +71,7 @@
             {% endfor %}
             {% if users.has_next %}
             <li class="page-item">
-                <a class="page-link" href="{{ url_for('list_users', page=users.next_num) }}" aria-label="Next">
+                <a class="page-link" href="{{ url_for('user.list_users', page=users.next_num) }}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

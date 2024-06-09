@@ -1,0 +1,42 @@
+{% extends "/components/base_user.html" %}
+{% block title %} Edit User {% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Edit User</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="parola" class="form-label">Password</label>
+            <input type="password" class="form-control" id="parola" name="parola">
+        </div>
+        <div class="mb-3">
+            <label for="rol" class="form-label">Role</label>
+            <input type="number" class="form-control" id="rol" name="rol" value="{{ user.rol }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="nume" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="nume" name="nume" value="{{ user.nume }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="prenume" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="prenume" name="prenume" value="{{ user.prenume }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="serieActIdentitate" class="form-label">ID Series</label>
+            <input type="text" class="form-control" id="serieActIdentitate" name="serieActIdentitate" value="{{ user.serieActIdentitate }}">
+        </div>
+        <div class="mb-3">
+            <label for="numarActIdentate" class="form-label">ID Number</label>
+            <input type="text" class="form-control" id="numarActIdentate" name="numarActIdentate" value="{{ user.numarActIdentate }}" required>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="reseteazaParola" name="reseteazaParola" {% if user.reseteazaParola %}checked{% endif %}>
+            <label class="form-check-label" for="reseteazaParola">Reset Password</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+{% endblock %}
