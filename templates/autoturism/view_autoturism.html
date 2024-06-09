@@ -1,0 +1,88 @@
+{% extends "/components/base_user.html" %}
+{% block title %}View Autoturism{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Autoturism nou</h2>
+    <form>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="marca" class="form-label">Marca</label>
+                <input type="text" class="form-control" id="marca" name="marca" value="{{ autoturism.marca }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="combustibil" class="form-label">Combustibil</label>
+                <input type="text" class="form-control" id="combustibil" name="combustibil" value="{{ autoturism.combustibil }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="model" class="form-label">Model</label>
+                <input type="text" class="form-control" id="model" name="model" value="{{ autoturism.model }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="transmisie" class="form-label">Transmisie</label>
+                <input type="text" class="form-control" id="transmisie" name="transmisie" value="{{ autoturism.tipTransmisie }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="numarInmatriculare" class="form-label">Număr Inmatriculare</label>
+                <input type="text" class="form-control" id="numarInmatriculare" name="numarInmatriculare" value="{{ autoturism.numarInmatriculare }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="capacitateCilindrica" class="form-label">Capacitate Cilindrica</label>
+                <input type="text" class="form-control" id="capacitateCilindrica" name="capacitateCilindrica" value="{{ autoturism.capacitateCilindrica }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="AnulFabricatiei" class="form-label">Anul Fabricatiei</label>
+                <input type="text" class="form-control" id="AnulFabricatiei" name="AnulFabricatiei" value="{{ autoturism.AnulFabricatiei }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="capacitateRezervor" class="form-label">Capacitate Rezervor</label>
+                <input type="text" class="form-control" id="capacitateRezervor" name="capacitateRezervor" value="{{ autoturism.capacitateRezervorTermic }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="serieCaroserie" class="form-label">Serie Caroserie</label>
+                <input type="text" class="form-control" id="serieCaroserie" name="serieCaroserie" value="{{ autoturism.serieCaroserie }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="putereMotor" class="form-label">Putere (kW)</label>
+                <input type="text" class="form-control" id="putereMotor" name="putereMotor" value="{{ autoturism.putereMotor }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="valoareOdometru" class="form-label">Valoare Odometru</label>
+                <input type="text" class="form-control" id="valoareOdometru" name="valoareOdometru" value="{{ autoturism.valoareOdometru }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="culoare" class="form-label">Culoare</label>
+                <input type="text" class="form-control" id="culoare" name="culoare" value="{{ autoturism.culoare }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="dataPrimeiImatirculari" class="form-label">Data Primei Imatirculari</label>
+                <input type="text" class="form-control" id="dataPrimeiImatirculari" name="dataPrimeiImatirculari" value="{{ autoturism.dataPrimeiImatirculari }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="status" class="form-label">Status Intern</label>
+                <input type="text" class="form-control" id="status" name="status" value="{{ autoturism.status }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="numarPropietariAnteriori" class="form-label">Numar Propietari Anteriori</label>
+                <input type="text" class="form-control" id="numarPropietariAnteriori" name="numarPropietariAnteriori" value="{{ autoturism.numarPropietariAnteriori }}" readonly>
+            </div>
+        </div>
+
+        <h3>Fotografii</h3>
+        <div class="row">
+            {% for fotografie in fotografii %}
+            <div class="col-md-2 mb-3">
+                <img src="{{ url_for('static', filename=fotografie.caleDiscFotografie) }}" alt="Foto" class="img-fluid">
+            </div>
+            {% endfor %}
+        </div>
+
+        <h3>Dotari</h3>
+        <ul class="list-unstyled">
+            {% for dotare in autoturism.dotari %}
+            <li>{{ dotare.dotare.name }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('autoturism.upload_photos', autoturism_id=autoturism.codAutoturism) }}" class="btn btn-warning">Upload Photos</a>
+    </form>
+</div>
+{% endblock %}

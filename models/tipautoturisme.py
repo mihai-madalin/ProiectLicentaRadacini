@@ -1,6 +1,6 @@
 from db import db
 
-class TipAutoturisme(db.Model):
+class TipAutoturism(db.Model):
     __tablename__ = 'tipautoturisme'
 
     codTipAutoturisme = db.Column(db.Integer, primary_key=True)

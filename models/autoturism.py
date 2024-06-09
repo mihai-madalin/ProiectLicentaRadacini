@@ -1,6 +1,6 @@
 from db import db
 
-class Autototurism(db.Model):
+class Autoturism(db.Model):
     __tablename__ = 'autototurisme'
 
     codAutoturism = db.Column(db.Integer, primary_key=True)
@@ -21,7 +21,8 @@ class Autototurism(db.Model):
     putereMotor = db.Column(db.Integer, nullable=False)
     tipTransmisie = db.Column(db.Integer, nullable=False)
     status = db.Column(db.Integer, nullable=False)
-
+    
+    
     def __init__(self, marca, model, valoareOdometru, tipAutoturism, AnulFabricatiei, serieCaroserie, numarInmatriculare, culoare, dataPrimeiImatirculari, capacitateCilindrica, combustibil, numarPropietariAnteriori, capacitateRezervorTermic, capacitateAutonomieBaterie, putereMotor, tipTransmisie, status):
         self.marca = marca
         self.model = model

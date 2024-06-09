@@ -1,0 +1,78 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Create Autoturism{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Create Autoturism</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="marca" class="form-label">Marca</label>
+            <input type="text" class="form-control" id="marca" name="marca" required>
+        </div>
+        <div class="mb-3">
+            <label for="model" class="form-label">Model</label>
+            <input type="text" class="form-control" id="model" name="model" required>
+        </div>
+        <div class="mb-3">
+            <label for="valoareOdometru" class="form-label">Valoare Odometru</label>
+            <input type="number" class="form-control" id="valoareOdometru" name="valoareOdometru" required>
+        </div>
+        <div class="mb-3">
+            <label for="tipAutoturism" class="form-label">Tip Autoturism</label>
+            <input type="number" class="form-control" id="tipAutoturism" name="tipAutoturism" required>
+        </div>
+        <div class="mb-3">
+            <label for="AnulFabricatiei" class="form-label">Anul Fabricatiei</label>
+            <input type="number" class="form-control" id="AnulFabricatiei" name="AnulFabricatiei" required>
+        </div>
+        <div class="mb-3">
+            <label for="serieCaroserie" class="form-label">Serie Caroserie</label>
+            <input type="text" class="form-control" id="serieCaroserie" name="serieCaroserie" required>
+        </div>
+        <div class="mb-3">
+            <label for="numarInmatriculare" class="form-label">Numar Inmatriculare</label>
+            <input type="text" class="form-control" id="numarInmatriculare" name="numarInmatriculare" required>
+        </div>
+        <div class="mb-3">
+            <label for="culoare" class="form-label">Culoare</label>
+            <input type="text" class="form-control" id="culoare" name="culoare" required>
+        </div>
+        <div class="mb-3">
+            <label for="dataPrimeiImatirculari" class="form-label">Data Primei Imatirculari</label>
+            <input type="date" class="form-control" id="dataPrimeiImatirculari" name="dataPrimeiImatirculari" required>
+        </div>
+        <div class="mb-3">
+            <label for="capacitateCilindrica" class="form-label">Capacitate Cilindrica</label>
+            <input type="number" class="form-control" id="capacitateCilindrica" name="capacitateCilindrica" required>
+        </div>
+        <div class="mb-3">
+            <label for="combustibil" class="form-label">Combustibil</label>
+            <input type="number" class="form-control" id="combustibil" name="combustibil" required>
+        </div>
+        <div class="mb-3">
+            <label for="numarPropietariAnteriori" class="form-label">Numar Propietari Anteriori</label>
+            <input type="number" class="form-control" id="numarPropietariAnteriori" name="numarPropietariAnteriori" required>
+        </div>
+        <div class="mb-3">
+            <label for="capacitateRezervorTermic" class="form-label">Capacitate Rezervor Termic</label>
+            <input type="number" class="form-control" id="capacitateRezervorTermic" name="capacitateRezervorTermic">
+        </div>
+        <div class="mb-3">
+            <label for="capacitateAutonomieBaterie" class="form-label">Capacitate Autonomie Baterie</label>
+            <input type="number" class="form-control" id="capacitateAutonomieBaterie" name="capacitateAutonomieBaterie">
+        </div>
+        <div class="mb-3">
+            <label for="putereMotor" class="form-label">Putere Motor</label>
+            <input type="number" class="form-control" id="putereMotor" name="putereMotor" required>
+        </div>
+        <div class="mb-3">
+            <label for="tipTransmisie" class="form-label">Tip Transmisie</label>
+            <input type="number" class="form-control" id="tipTransmisie" name="tipTransmisie" required>
+        </div>
+        <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <input type="number" class="form-control" id="status" name="status" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+{% endblock %}

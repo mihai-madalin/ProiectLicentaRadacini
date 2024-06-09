@@ -1,0 +1,14 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Upload Photos{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Upload Photos for {{ autoturism.marca }} {{ autoturism.model }}</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="file" class="form-label">Choose photo</label>
+            <input type="file" class="form-control" id="file" name="file" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+</div>
+{% endblock %}

@@ -42,8 +42,10 @@ def login():
         if user and check_password_hash(user.parola, parola):
             login_user(user)
             flash("Login successful", "success")
-            print("Succes")
-            return redirect(url_for("user.list_users"))
+            if user.reseteazaParola == True:
+                return return_reset_page(user.codUtilizator)
+            else:
+                return redirect(url_for("user.list_users"))
         else:
             flash("Login failed. Check your email and password.", 'danger')
     return render_template("user/login.html")
@@ -104,4 +106,25 @@ def remove_user(user_id):
         flash(f"Current user is unavailable", "warning")
         
     return list_users()
+
+
+def reset_password(user_id):
+    user = Utilizator.query.get_or_404(user_id)
+    if request.method == "POST":
+        new_password = request.form["new_password"]
+        confirm_password = request.form["confirm_password"]
+        
+        if new_password != confirm_password:
+            flash("Passwords do not match. Please try again.", "danger")
+        else:
+            user.parola = generate_password_hash(new_password)
+            user.reseteazaParola = False
+            db.session.commit()
+            flash("Password updated successfully", "success")
+            return redirect(url_for("homePage"))
+
+
+def return_reset_page(user_id):
+    user = Utilizator.query.get_or_404(user_id)
+    return render_template("user/reset_password.html", user=user)
     

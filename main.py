@@ -2,6 +2,7 @@ from flask import Flask, redirect, url_for, render_template, request
 from flask_login import LoginManager, login_required
 from db import db
 from blueprints.user import user_bp
+from blueprints.autoturism import autoturism_bp
 
 from models.utilizatori import Utilizator
 
@@ -17,21 +18,10 @@ login_manager.init_app(app)
 login_manager.login_view = 'user.login' 
 
 app.register_blueprint(user_bp, url_prefix='/user')
+app.register_blueprint(autoturism_bp, url_prefix='/autoturism')
 
 @app.route("/")
 def homePage():
-    user = Utilizator(
-        email="mihai.madalin@gmail.com",
-        parola="Parola_01",
-        rol=1,
-        nume="Neculai",
-        prenume="Mihaita-Madalin",
-        serieActIdentitate="BR",
-        numarActIdentate="123445",
-        reseteazaParola=True
-    )
-    db.session.add(user)
-    db.session.commit()
     return render_template("/pages/index.html")
 
 @login_manager.user_loader
