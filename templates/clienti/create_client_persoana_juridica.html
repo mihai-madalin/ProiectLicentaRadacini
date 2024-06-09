@@ -1,0 +1,120 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Client Persoana Juridică{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Client Persoana Juridică</h2>
+    <form method="POST">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="Nume" class="form-label">Nume</label>
+                <input type="text" class="form-control" id="Nume" name="Nume" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="NumarRegistrulComertului" class="form-label">Număr Înregistrare Registrul Comerțului</label>
+                <input type="text" class="form-control" id="NumarRegistrulComertului" name="NumarRegistrulComertului">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="CUI" class="form-label">Cod Unic de Identificare</label>
+                <input type="text" class="form-control" id="CUI" name="CUI" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="SucursalaBancii" class="form-label">Banca Emitentă</label>
+                <input type="text" class="form-control" id="SucursalaBancii" name="SucursalaBancii" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="IBAN" class="form-label">Cont Bancar</label>
+                <input type="text" class="form-control" id="IBAN" name="IBAN" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Tara" class="form-label">Țara</label>
+                <input type="text" class="form-control" id="Tara" name="Tara" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Judet" class="form-label">Județ</label>
+                <input type="text" class="form-control" id="Judet" name="Judet">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Oras" class="form-label">Localitate</label>
+                <input type="text" class="form-control" id="Oras" name="Oras" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Strada" class="form-label">Stradă</label>
+                <input type="text" class="form-control" id="Strada" name="Strada" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Numar" class="form-label">Număr</label>
+                <input type="text" class="form-control" id="Numar" name="Numar" required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="Bloc" class="form-label">Bloc</label>
+                <input type="text" class="form-control" id="Bloc" name="Bloc">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="Scara" class="form-label">Scară</label>
+                <input type="text" class="form-control" id="Scara" name="Scara">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="Etaj" class="form-label">Etaj</label>
+                <input type="text" class="form-control" id="Etaj" name="Etaj">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="Apartament" class="form-label">Apartament</label>
+                <input type="text" class="form-control" id="Apartament" name="Apartament">
+            </div>
+        </div>
+
+        <h4>Date Reprezentant Legal</h4>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="numeReprezentant" class="form-label">Nume</label>
+                <input type="text" class="form-control" id="numeReprezentant" name="numeReprezentant" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="prenumeReprezentant" class="form-label">Prenume</label>
+                <input type="text" class="form-control" id="prenumeReprezentant" name="prenumeReprezentant" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="telefonReprezentant" class="form-label">Numar Telefon</label>
+                <input type="text" class="form-control" id="telefonReprezentant" name="telefonReprezentant" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="CNPReprezentant" class="form-label">Cod Numeric Personal</label>
+                <input type="text" class="form-control" id="CNPReprezentant" name="CNPReprezentant" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="judetReprezentant" class="form-label">Județ</label>
+                <input type="text" class="form-control" id="judetReprezentant" name="judetReprezentant">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="orasReprezentant" class="form-label">Localitate</label>
+                <input type="text" class="form-control" id="orasReprezentant" name="orasReprezentant">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="stradaReprezentant" class="form-label">Stradă</label>
+                <input type="text" class="form-control" id="stradaReprezentant" name="stradaReprezentant">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="numarReprezentant" class="form-label">Număr</label>
+                <input type="text" class="form-control" id="numarReprezentant" name="numarReprezentant">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="blocReprezentant" class="form-label">Bloc</label>
+                <input type="text" class="form-control" id="blocReprezentant" name="blocReprezentant">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="scaraReprezentant" class="form-label">Scară</label>
+                <input type="text" class="form-control" id="scaraReprezentant" name="scaraReprezentant">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="etajReprezentant" class="form-label">Etaj</label>
+                <input type="text" class="form-control" id="etajReprezentant" name="etajReprezentant">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="appartamentReprezentant" class="form-label">Apartament</label>
+                <input type="text" class="form-control" id="appartamentReprezentant" name="appartamentReprezentant">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salveaza</button>
+    </form>
+</div>
+{% endblock %}

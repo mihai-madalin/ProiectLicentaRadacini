@@ -1,0 +1,61 @@
+{% extends "/components/base_user.html" %}
+{% block title %}View Client Persoana Fizică{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Client Persoana Fizică</h2>
+    <form>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="nume" class="form-label">Nume</label>
+                <input type="text" class="form-control" id="nume" name="nume" value="{{ client.nume }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="prenume" class="form-label">Prenume</label>
+                <input type="text" class="form-control" id="prenume" name="prenume" value="{{ client.prenume }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="telefon" class="form-label">Numar Telefon</label>
+                <input type="text" class="form-control" id="telefon" name="telefon" value="{{ client.telefon }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="CNP" class="form-label">Cod Numeric Personal</label>
+                <input type="text" class="form-control" id="CNP" name="CNP" value="{{ client.CNP }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="judet" class="form-label">Județ</label>
+                <input type="text" class="form-control" id="judet" name="judet" value="{{ client.judet }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="oras" class="form-label">Localitate</label>
+                <input type="text" class="form-control" id="oras" name="oras" value="{{ client.oras }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="strada" class="form-label">Stradă</label>
+                <input type="text" class="form-control" id="strada" name="strada" value="{{ client.strada }}" readonly>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="numar" class="form-label">Număr</label>
+                <input type="text" class="form-control" id="numar" name="numar" value="{{ client.numar }}" readonly>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="bloc" class="form-label">Bloc</label>
+                <input type="text" class="form-control" id="bloc" name="bloc" value="{{ client.bloc }}" readonly>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="scara" class="form-label">Scară</label>
+                <input type="text" class="form-control" id="scara" name="scara" value="{{ client.scara }}" readonly>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="etaj" class="form-label">Etaj</label>
+                <input type="text" class="form-control" id="etaj" name="etaj" value="{{ client.etaj }}" readonly>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="appartament" class="form-label">Apartament</label>
+                <input type="text" class="form-control" id="appartament" name="appartament" value="{{ client.appartament }}" readonly>
+            </div>
+        </div>
+        <a href="{{ url_for('clienti.edit_client_fizica', client_id=client.codClientPF) }}" class="btn btn-primary">Editează</a>
+
+    </form>
+</div>
+{% endblock %}

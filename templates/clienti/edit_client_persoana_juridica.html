@@ -1,0 +1,120 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Edit Client Persoana Juridică{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Edit Client Persoana Juridică</h2>
+    <form method="POST">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="Nume" class="form-label">Nume</label>
+                <input type="text" class="form-control" id="Nume" name="Nume" value="{{ client.Nume }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="NumarRegistrulComertului" class="form-label">Număr Înregistrare Registrul Comerțului</label>
+                <input type="text" class="form-control" id="NumarRegistrulComertului" name="NumarRegistrulComertului" value="{{ client.NumarRegistrulComertului }}">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="CUI" class="form-label">Cod Unic de Identificare</label>
+                <input type="text" class="form-control" id="CUI" name="CUI" value="{{ client.CUI }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="SucursalaBancii" class="form-label">Banca Emitentă</label>
+                <input type="text" class="form-control" id="SucursalaBancii" name="SucursalaBancii" value="{{ client.SucursalaBancii }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="IBAN" class="form-label">Cont Bancar</label>
+                <input type="text" class="form-control" id="IBAN" name="IBAN" value="{{ client.IBAN }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Tara" class="form-label">Țara</label>
+                <input type="text" class="form-control" id="Tara" name="Tara" value="{{ client.Tara }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Judet" class="form-label">Județ</label>
+                <input type="text" class="form-control" id="Judet" name="Judet" value="{{ client.Judet }}">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Oras" class="form-label">Localitate</label>
+                <input type="text" class="form-control" id="Oras" name="Oras" value="{{ client.Oras }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Strada" class="form-label">Stradă</label>
+                <input type="text" class="form-control" id="Strada" name="Strada" value="{{ client.Strada }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Numar" class="form-label">Număr</label>
+                <input type="text" class="form-control" id="Numar" name="Numar" value="{{ client.Numar }}" required>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="Bloc" class="form-label">Bloc</label>
+                <input type="text" class="form-control" id="Bloc" name="Bloc" value="{{ client.Bloc }}">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="Scara" class="form-label">Scară</label>
+                <input type="text" class="form-control" id="Scara" name="Scara" value="{{ client.Scara }}">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="Etaj" class="form-label">Etaj</label>
+                <input type="text" class="form-control" id="Etaj" name="Etaj" value="{{ client.Etaj }}">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="Apartament" class="form-label">Apartament</label>
+                <input type="text" class="form-control" id="Apartament" name="Apartament" value="{{ client.Apartament }}">
+            </div>
+        </div>
+
+        <h4>Date Reprezentant Legal</h4>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="numeReprezentant" class="form-label">Nume</label>
+                <input type="text" class="form-control" id="numeReprezentant" name="numeReprezentant" value="{{ client.numeReprezentant }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="prenumeReprezentant" class="form-label">Prenume</label>
+                <input type="text" class="form-control" id="prenumeReprezentant" name="prenumeReprezentant" value="{{ client.prenumeReprezentant }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="telefonReprezentant" class="form-label">Numar Telefon</label>
+                <input type="text" class="form-control" id="telefonReprezentant" name="telefonReprezentant" value="{{ client.telefonReprezentant }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="CNPReprezentant" class="form-label">Cod Numeric Personal</label>
+                <input type="text" class="form-control" id="CNPReprezentant" name="CNPReprezentant" value="{{ client.CNPReprezentant }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="judetReprezentant" class="form-label">Județ</label>
+                <input type="text" class="form-control" id="judetReprezentant" name="judetReprezentant" value="{{ client.judetReprezentant }}">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="orasReprezentant" class="form-label">Localitate</label>
+                <input type="text" class="form-control" id="orasReprezentant" name="orasReprezentant" value="{{ client.orasReprezentant }}">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="stradaReprezentant" class="form-label">Stradă</label>
+                <input type="text" class="form-control" id="stradaReprezentant" name="stradaReprezentant" value="{{ client.stradaReprezentant }}">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="numarReprezentant" class="form-label">Număr</label>
+                <input type="text" class="form-control" id="numarReprezentant" name="numarReprezentant" value="{{ client.numarReprezentant }}">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="blocReprezentant" class="form-label">Bloc</label>
+                <input type="text" class="form-control" id="blocReprezentant" name="blocReprezentant" value="{{ client.blocReprezentant }}">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="scaraReprezentant" class="form-label">Scară</label>
+                <input type="text" class="form-control" id="scaraReprezentant" name="scaraReprezentant" value="{{ client.scaraReprezentant }}">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="etajReprezentant" class="form-label">Etaj</label>
+                <input type="text" class="form-control" id="etajReprezentant" name="etajReprezentant" value="{{ client.etajReprezentant }}">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="appartamentReprezentant" class="form-label">Apartament</label>
+                <input type="text" class="form-control" id="appartamentReprezentant" name="appartamentReprezentant" value="{{ client.appartamentReprezentant }}">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salveaza</button>
+    </form>
+</div>
+{% endblock %}

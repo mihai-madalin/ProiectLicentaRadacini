@@ -1,0 +1,39 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Lista Clienti{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Lista Clienti</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Tip Client</th>
+                <th>Nume</th>
+                <th>Acțiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in combined_clients %}
+            <tr>
+                <td>{{ 'Persoana Fizică' if client.type == 'fizica' else 'Persoana Juridică' }}</td>
+                <td>{{ client.name }}</td>
+                <td>
+                    {% if client.type == 'fizica' %}
+                    <a href="{{ url_for('clienti.view_client_fizica', client_id=client.id) }}" class="btn btn-info">Vizualizează</a>
+                    <a href="{{ url_for('clienti.edit_client_fizica', client_id=client.id) }}" class="btn btn-warning">Editează</a>
+                    <form action="" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Șterge</button>
+                    </form>
+                    {% else %}
+                    <a href="{{ url_for('clienti.view_client_juridica', client_id=client.id) }}" class="btn btn-info">Vizualizează</a>
+                    <a href="{{ url_for('clienti.edit_client_juridica', client_id=client.id) }}" class="btn btn-warning">Editează</a>
+                    <form action="" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Șterge</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

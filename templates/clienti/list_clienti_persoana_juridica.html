@@ -1,0 +1,33 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Lista Clienti Persoana Juridică{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Lista Clienti Persoana Juridică</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nume</th>
+                <th>Telefon Reprezentant</th>
+                <th>Acțiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clienti_juridici %}
+            <tr>
+                <td>{{ client.codClientPJ }}</td>
+                <td>{{ client.Nume }}</td>
+                <td>{{ client.telefonReprezentant }}</td>
+                <td>
+                    <a href="{{ url_for('clienti.view_client_juridica', client_id=client.codClientPJ) }}" class="btn btn-info">Vizualizează</a>
+                    <a href="{{ url_for('clienti.edit_client_juridica', client_id=client.codClientPJ) }}" class="btn btn-warning">Editează</a>
+                    <form action="" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Șterge</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
