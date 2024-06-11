@@ -1,7 +1,7 @@
 CREATE TABLE `Utilizatori` (
   `codUtilizator` int(8) PRIMARY KEY AUTO_INCREMENT,
   `email` varchar(60) NOT NULL,
-  `parola` varchar(128) NOT NULL,
+  `parola` varchar(256) NOT NULL,
   `rol` int(1) NOT NULL,
   `nume` varchar(50) NOT NULL,
   `prenume` varchar(50) NOT NULL,
@@ -9,6 +9,19 @@ CREATE TABLE `Utilizatori` (
   `numarActIdentate` varchar(10) NOT NULL,
   `reseteazaParola` bool NOT NULL
 );
+
+INSERT INTO `Utilizatori` VALUES (
+  1,
+  'mihai.madalin@gmail.com',
+  'scrypt:32768:8:1$n9OVZW1gNXfiDCYO$9025194d58ea3b65e26b69007617fdacff0596a6880ddcb0cc82ceb4b55942af7115232c1ef90d2b75cf513af0f40840eb73541560c351126eb3a5054f435121',
+  '4',
+  'Neculai',
+  'Mihaita Madalin',
+  'XR',
+  '111111',
+  0
+  );
+
 
 CREATE TABLE `Autototurisme` (
   `codAutoturism` int(8) PRIMARY KEY AUTO_INCREMENT,
