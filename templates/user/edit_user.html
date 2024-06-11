@@ -1,42 +1,46 @@
 {% extends "/components/base_user.html" %}
-{% block title %} Edit User {% endblock %}
+{% block title %} Modifica datele utilizatorului {{ user.prenume }} {{ user.nume }} {% endblock %}
 {% block content %}
 <div class="container">
-    <h2 class="my-4">Edit User</h2>
+    <h2 class="my-4">Modifica datele utilizatorului {{ user.prenume }} {{ user.nume }}</h2>
     <form method="POST">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="prenume" class="form-label">Prenume</label>
+                <input type="text" class="form-control" id="prenume" name="prenume" value="{{ user.prenume }}" required>
+            </div>
+            <div class="col-md-6">
+                <label for="nume" class="form-label">Nume</label>
+                <input type="text" class="form-control" id="nume" name="nume" value="{{ user.nume }}" required>
+            </div>
+        </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
         </div>
+        {% if current_user.rol == 4 %}
         <div class="mb-3">
-            <label for="parola" class="form-label">Password</label>
-            <input type="password" class="form-control" id="parola" name="parola">
+            <label for="rol" class="form-label">Rol</label>
+            <select id="rol" name="rol" class="form-select" {% if current_user.rol != 4 %}readonly{% endif %} required>
+                <option value="1" {% if user.rol == 1 %} selected {% endif %}>Agent Vanzari</option>
+                <option value="2" {% if user.rol == 2 %} selected {% endif %}>Inspector Tehnic</option>
+                <option value="3" {% if user.rol == 3 %} selected {% endif %}>Departament Financiar</option>
+                <option value="4" {% if user.rol == 4 %} selected {% endif %}>Administrator</option>
+            </select>
         </div>
-        <div class="mb-3">
-            <label for="rol" class="form-label">Role</label>
-            <input type="number" class="form-control" id="rol" name="rol" value="{{ user.rol }}" required>
+        {% endif %}
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <label for="serieActIdentitate" class="form-label">Serie Act Identitate</label>
+                <input type="text" class="form-control" id="serieActIdentitate" name="serieActIdentitate" value="{{ user.serieActIdentitate }}">
+            </div>
+            <div class="col-md-9">
+                <label for="numarActIdentate" class="form-label">Număr Act Identitate</label>
+                <input type="text" class="form-control" id="numarActIdentate" name="numarActIdentate" value="{{ user.numarActIdentate }}" required>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="nume" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="nume" name="nume" value="{{ user.nume }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="prenume" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="prenume" name="prenume" value="{{ user.prenume }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="serieActIdentitate" class="form-label">ID Series</label>
-            <input type="text" class="form-control" id="serieActIdentitate" name="serieActIdentitate" value="{{ user.serieActIdentitate }}">
-        </div>
-        <div class="mb-3">
-            <label for="numarActIdentate" class="form-label">ID Number</label>
-            <input type="text" class="form-control" id="numarActIdentate" name="numarActIdentate" value="{{ user.numarActIdentate }}" required>
-        </div>
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="reseteazaParola" name="reseteazaParola" {% if user.reseteazaParola %}checked{% endif %}>
-            <label class="form-check-label" for="reseteazaParola">Reset Password</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Salvează</button>
+        <a href="{{ url_for('user.reset_password', user_id=user.codUtilizator) }}" class="btn btn-warning">Resetează Parola</a>
     </form>
 </div>
 {% endblock %}

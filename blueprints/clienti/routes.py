@@ -27,7 +27,7 @@ def create_client_fizica():
         db.session.add(new_client)
         db.session.commit()
         flash("Client created successfully.", "success")
-        return redirect(url_for("clienti.list_clienti"))
+        return redirect(url_for("clienti.list_clienti_combined"))
     return render_template("clienti/create_client_persoana_fizica.html")
 
 @clienti_bp.route("/create_client_persoana_juridica", methods=["GET", "POST"])
@@ -84,7 +84,7 @@ def list_clienti_juridici():
     return render_template("clienti/list_clienti_persoana_juridica.html", clienti_juridici=clienti_juridici)
 
 # List Combined Clients
-@clienti_bp.route("/list_combined", methods=["GET"])
+@clienti_bp.route("/list_clienti_combined", methods=["GET"])
 @login_required
 def list_clienti_combined():
     clienti_fizici = ClientPersoanaFizica.query.all()

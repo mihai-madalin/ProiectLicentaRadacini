@@ -59,7 +59,7 @@ def logout():
 @user_bp.route("/list")
 @login_required
 def list_users():
-    if current_user.rol != 3:
+    if current_user.rol != 4:
         flash(f"You do not have permission to view this page. Ai drepturi de: {current_user.rol}", "warning")
         return redirect(url_for("user.login"))
     page = request.args.get('page', 1, type=int)
@@ -67,23 +67,24 @@ def list_users():
     return render_template("user/users.html", users=users)
 
 
-@user_bp.route("/edit/<int:user_id>", methods=["GET", "POST"])
+@user_bp.route('/edit/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def edit_user(user_id):
-    if current_user.rol != 3:
-        flash(f"You do not have permission to view this page. Ai drepturi de: {current_user.rol}", "warning")
+    print(current_user.codUtilizator == user_id)
+    if (current_user.rol != 4 and current_user.codUtilizator != user_id):
+        flash(f"Nu ai acces la aceasta pagina. Ai drepturi de: {current_user.rol}", "warning")
         return redirect(url_for("user.login"))
     user = Utilizator.query.get_or_404(user_id)
     if request.method == "POST":
         user.email = request.form["email"]
-        if request.form["parola"]:
+        if "parola" in request.form and request.form["parola"]:
             user.parola = generate_password_hash(request.form["parola"])
-        user.rol = request.form["rol"]
+        if current_user.rol == 4:
+            user.rol = request.form["rol"]
         user.nume = request.form["nume"]
         user.prenume = request.form["prenume"]
         user.serieActIdentitate = request.form["serieActIdentitate"]
         user.numarActIdentate = request.form["numarActIdentate"]
-        user.reseteazaParola = request.form.get("reseteazaParola") == "on"
         
         db.session.commit()
         flash("User updated successfully", "success")
@@ -107,7 +108,7 @@ def remove_user(user_id):
         
     return list_users()
 
-
+@user_bp.route("/reset_password/<int:user_id>", methods=["GET", "POST"])
 def reset_password(user_id):
     user = Utilizator.query.get_or_404(user_id)
     if request.method == "POST":
@@ -127,4 +128,19 @@ def reset_password(user_id):
 def return_reset_page(user_id):
     user = Utilizator.query.get_or_404(user_id)
     return render_template("user/reset_password.html", user=user)
+
+
+
+@user_bp.route('/profile')
+@login_required
+def profile():
+    role_names = {
+        1: "Agent Vanzari",
+        2: "Inspector Tehnic",
+        3: "Departament Financiar",
+        4: "Administrator"
+    }
+    user = current_user
+    user.rol_name = role_names.get(user.rol, "Rol neidentificat")
     
+    return render_template('user/profile.html', user=user)

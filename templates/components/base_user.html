@@ -6,6 +6,23 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>{% block title %}{% endblock %}</title>
+    <style>
+        /* CSS preluat de pe site-ul https://mdbootstrap.com/docs/standard/extended/dropdown-multilevel/ 
+        Pentru a permite Drop Down Inlantuit pentru clienti*/
+        .dropdown-submenu {
+            position: relative;
+        }
+        .dropdown-submenu > .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: -1px;
+            border-radius: 0.25rem 0.25rem 0.25rem 0.25rem;
+        }
+        .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid">
@@ -14,79 +31,108 @@
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap" />
                 </svg>
-                <span class="fs-4">Radacini SRL</span>
+                <span class="fs-4"><img src="https://ireland.apollo.olxcdn.com/v1/files/eyJmbiI6IjI4OThyeXBkZm1yNDMtQVVUT1ZJVFJPIn0.LfyGOSKB_7REjLr8NsQygW0BK27kUtLssvK5n_F1opo/image" width="220" height="60" alt=""></span>
             </a>
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page">Home</a>
+                    <a href="/" class="nav-link active" aria-current="page">Acasa</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clienti</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ url_for('clienti.list_clienti_combined') }}">Lista tuturor clientilor</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Persoane Fizice</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('clienti.create_client_fizica') }}">Adaugare</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('clienti.list_clienti_fizici') }}">Lista Persoane Fizice</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Persoane Juridice</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('clienti.create_client_juridica') }}">Adaugare</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('clienti.list_clienti_juridici') }}">Lista Persoane Juridice</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Autoturisme</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ url_for('autoturism.create_autoturism') }}">Adauga Autoturism</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('autoturism.list_autoturism') }}">Lista Autoturisme</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
-                <a href="#" class="nav-link">Features</a>
+                    <a href="#" class="nav-link">FAQs</a>
                 </li>
                 <li class="nav-item">
-                <a href="#" class="nav-link">Pricing</a>
+                    <a href="#" class="nav-link">About</a>
                 </li>
                 <li class="nav-item">
-                <a href="#" class="nav-link">FAQs</a>
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('user.profile') }}" class="nav-link">{{current_user.nume}} {{current_user.prenume}}</a>
+                    {% else %}
+                    <a href="{{ url_for('user.login') }}" class="nav-link">Autentifica-te</a>
+                    {% endif %}
                 </li>
+                {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                <a href="#" class="nav-link">About</a>
+                    <a href="{{ url_for('user.logout') }}" class="nav-link">Deautentificare</a>
                 </li>
+                {% endif %}
             </ul>
-            </header>
-            <div class="container-fluid" >
-                {% block content %} {% endblock %}
-            </div>
-            <footer>
-                <div class="container-fluid">
-                    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
-                      <div class="col mb-3">
+        </header>
+        <div class="container-fluid">
+            {% block content %} {% endblock %}
+        </div>
+        <footer>
+            <div class="container-fluid">
+                <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+                    <div class="col mb-3">
                         <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
-                          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
                         </a>
                         <p class="text-body-secondary">&copy; 2024</p>
-                      </div>
-                  
-                      <div class="col mb-3">
-                  
-                      </div>
-                  
-                      <div class="col mb-3">
+                    </div>
+
+                    <div class="col mb-3"></div>
+
+                    <div class="col mb-3">
                         <h5>Section</h5>
                         <ul class="nav flex-column">
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
                         </ul>
-                      </div>
-                  
-                      <div class="col mb-3">
+                    </div>
+
+                    <div class="col mb-3">
                         <h5>Section</h5>
                         <ul class="nav flex-column">
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
                         </ul>
-                      </div>
-                  
-                      <div class="col mb-3">
+                    </div>
+
+                    <div class="col mb-3">
                         <h5>Section</h5>
                         <ul class="nav flex-column">
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
                         </ul>
-                      </div>
-                    </footer>
-                  </div>
-            </footer>
+                    </div>
+                </footer>
+            </div>
+        </footer>
     </div>
-    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 from flask import Flask, redirect, url_for, render_template, request
-from flask_login import LoginManager, login_required
+from flask_login import LoginManager, login_required, current_user
 from db import db
 from blueprints.user import user_bp
 from blueprints.autoturism import autoturism_bp

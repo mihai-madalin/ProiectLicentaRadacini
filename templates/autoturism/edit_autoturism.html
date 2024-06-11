@@ -1,17 +1,17 @@
 {% extends "/components/base_user.html" %}
-{% block title %}Vizualizare Autoturism{% endblock %}
+{% block title %}Editare Autoturism{% endblock %}
 {% block content %}
 <div class="container">
-    <h2 class="my-4">Autoturism nou</h2>
-    <form>
+    <h2 class="my-4">Editare Autoturism</h2>
+    <form method="POST" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="marca" class="form-label">Marca</label>
-                <input type="text" class="form-control" id="marca" name="marca" value="{{ autoturism.marca }}" readonly>
+                <input type="text" class="form-control" id="marca" name="marca" value="{{ autoturism.marca }}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="combustibil" class="form-label">Combustibil</label>
-                <select class="form-select" id="combustibil" name="combustibil" disabled>
+                <select class="form-select" id="combustibil" name="combustibil">
                     <option value="1" {% if autoturism.combustibil == 1 %} selected {% endif %}>Benzină</option>
                     <option value="2" {% if autoturism.combustibil == 2 %} selected {% endif %}>Diesel</option>
                     <option value="3" {% if autoturism.combustibil == 3 %} selected {% endif %}>Electrică</option>
@@ -24,54 +24,54 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="model" class="form-label">Model</label>
-                <input type="text" class="form-control" id="model" name="model" value="{{ autoturism.model }}" readonly>
+                <input type="text" class="form-control" id="model" name="model" value="{{ autoturism.model }}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="transmisie" class="form-label">Transmisie</label>
-                <select class="form-select" id="transmisie" name="transmisie" disabled>
+                <select class="form-select" id="transmisie" name="tipTransmisie">
                     <option value="1" {% if autoturism.tipTransmisie == 1 %} selected {% endif %}>Manuală</option>
                     <option value="2" {% if autoturism.tipTransmisie == 2 %} selected {% endif %}>Automată</option>
                 </select>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="numarInmatriculare" class="form-label">Număr Înmatriculare</label>
-                <input type="text" class="form-control" id="numarInmatriculare" name="numarInmatriculare" value="{{ autoturism.numarInmatriculare }}" readonly>
+                <input type="text" class="form-control" id="numarInmatriculare" name="numarInmatriculare" value="{{ autoturism.numarInmatriculare }}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="capacitateCilindrica" class="form-label">Capacitate Cilindrică</label>
-                <input type="text" class="form-control" id="capacitateCilindrica" name="capacitateCilindrica" value="{{ autoturism.capacitateCilindrica }}" readonly>
+                <input type="text" class="form-control" id="capacitateCilindrica" name="capacitateCilindrica" value="{{ autoturism.capacitateCilindrica }}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="AnulFabricatiei" class="form-label">Anul Fabricației</label>
-                <input type="text" class="form-control" id="AnulFabricatiei" name="AnulFabricatiei" value="{{ autoturism.AnulFabricatiei }}" readonly>
+                <input type="text" class="form-control" id="AnulFabricatiei" name="AnulFabricatiei" value="{{ autoturism.AnulFabricatiei }}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="capacitateRezervor" class="form-label">Capacitate Rezervor</label>
-                <input type="text" class="form-control" id="capacitateRezervor" name="capacitateRezervor" value="{{ autoturism.capacitateRezervorTermic }}" readonly>
+                <input type="text" class="form-control" id="capacitateRezervor" name="capacitateRezervor" value="{{ autoturism.capacitateRezervorTermic }}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="serieCaroserie" class="form-label">Serie Caroserie</label>
-                <input type="text" class="form-control" id="serieCaroserie" name="serieCaroserie" value="{{ autoturism.serieCaroserie }}" readonly>
+                <input type="text" class="form-control" id="serieCaroserie" name="serieCaroserie" value="{{ autoturism.serieCaroserie }}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="putereMotor" class="form-label">Putere (kW)</label>
-                <input type="text" class="form-control" id="putereMotor" name="putereMotor" value="{{ autoturism.putereMotor }}" readonly>
+                <input type="text" class="form-control" id="putereMotor" name="putereMotor" value="{{ autoturism.putereMotor }}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="valoareOdometru" class="form-label">Valoare Odometru</label>
-                <input type="text" class="form-control" id="valoareOdometru" name="valoareOdometru" value="{{ autoturism.valoareOdometru }}" readonly>
+                <input type="text" class="form-control" id="valoareOdometru" name="valoareOdometru" value="{{ autoturism.valoareOdometru }}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="culoare" class="form-label">Culoare</label>
-                <input type="text" class="form-control" id="culoare" name="culoare" value="{{ autoturism.culoare }}" readonly>
+                <input type="text" class="form-control" id="culoare" name="culoare" value="{{ autoturism.culoare }}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="dataPrimeiImatirculari" class="form-label">Data Primei Înmatriculări</label>
-                <input type="text" class="form-control" id="dataPrimeiImatirculari" name="dataPrimeiImatirculari" value="{{ autoturism.dataPrimeiImatirculari }}" readonly>
+                <input type="text" class="form-control" id="dataPrimeiImatirculari" name="dataPrimeiImatirculari" value="{{ autoturism.dataPrimeiImatirculari }}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="status" class="form-label">Status Intern</label>
-                <select class="form-select" id="status" name="status" disabled>
+                <select class="form-select" id="status" name="status">
                     <option value="0" {% if autoturism.status == 0 %} selected {% endif %}>Neverificată</option>
                     <option value="1" {% if autoturism.status == 1 %} selected {% endif %}>Verificată</option>
                     <option value="2" {% if autoturism.status == 2 %} selected {% endif %}>În vânzare</option>
@@ -81,7 +81,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="numarPropietariAnteriori" class="form-label">Număr Proprietari Anteriori</label>
-                <input type="text" class="form-control" id="numarPropietariAnteriori" name="numarPropietariAnteriori" value="{{ autoturism.numarPropietariAnteriori }}" readonly>
+                <input type="text" class="form-control" id="numarPropietariAnteriori" name="numarPropietariAnteriori" value="{{ autoturism.numarPropietariAnteriori }}">
             </div>
         </div>
 
@@ -93,14 +93,13 @@
             </div>
             {% endfor %}
         </div>
+        
+        <div class="mb-3">
+            <label for="file" class="form-label">Alege fotografia</label>
+            <input type="file" class="form-control" id="file" name="file">
+        </div>
 
-        <h3>Dotări</h3>
-        <ul class="list-unstyled">
-            {% for dotare in autoturism.dotari %}
-            <li>{{ dotare.dotare.name }}</li>
-            {% endfor %}
-        </ul>
-        <a href="{{ url_for('autoturism.upload_photos', autoturism_id=autoturism.codAutoturism) }}" class="btn btn-warning">Upload Photos</a>
+        <button type="submit" class="btn btn-primary">Salvează</button>
     </form>
 </div>
 {% endblock %}

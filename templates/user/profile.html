@@ -1,0 +1,58 @@
+{% extends "/components/base_user.html" %}
+{% block title %} Profil Utilizator {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <p class="card-title">{{user.prenume}} {{user.nume}}</p>
+                    <h5 class="card-text">Rol: {{ user.rol_name }}</h5>
+                    <ul class="nav">
+                        <li class="nav-item col-12"><a class="nav-link" href="{{ url_for('user.edit_user', user_id=user.codUtilizator) }}">Editeaza Cont</a></li>
+                        <li class="nav-item col-12" ><a class="nav-link" href="mailto:tehnic@radacini-test.ro">Solicita asistenta</a></li>
+                        <li class="nav-item col-12"><a class="nav-link" href="{{ url_for('user.logout') }}">Deautentificare</a></li>
+                    </ul>
+                    <ul class="nav">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Detalii Cont</h5>
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="prenume" class="form-label">Prenume</label>
+                                <input type="text" class="form-control" id="prenume" name="prenume" value="{{ user.prenume }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label for="nume" class="form-label">Nume</label>
+                                <input type="text" class="form-control" id="nume" name="nume" value="{{ user.nume }}" readonly>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="serieActIdentitate" class="form-label">Serie Act Identitate</label>
+                            <input type="text" class="form-control" id="serieActIdentitate" name="serieActIdentitate" value="{{ user.serieActIdentitate }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="numarActIdentate" class="form-label">Număr Act Identitate</label>
+                            <input type="text" class="form-control" id="numarActIdentate" name="numarActIdentate" value="{{ user.numarActIdentate }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefon" class="form-label">Număr Telefon</label>
+                            <input type="text" class="form-control" id="telefon" name="telefon" value="{{ user.telefon }}" readonly>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
