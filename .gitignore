@@ -1,0 +1,5 @@
+# Ignore all pycache folders
+__pycache__/*
+
+# Ignore all files and folders within the autoturisme folder
+uploads/autoturisme/*
