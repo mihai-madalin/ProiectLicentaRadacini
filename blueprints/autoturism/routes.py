@@ -5,6 +5,7 @@ import os
 from db import db
 from models.tipautoturisme import TipAutoturism
 from models.autoturism import Autoturism
+from models.dotari import Dotare
 from models.autoturisme_dotari import AutoturismDotari
 from models.autoturisme_fotografii import AutoturismFotografii
 from blueprints.autoturism import autoturism_bp
@@ -18,39 +19,65 @@ def get_tip_autoturism(codTipAutoturism):
     else:
         return "Tip neidentificat" 
 
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 @autoturism_bp.route("/create", methods=["GET", "POST"])
 @login_required
 def create_autoturism():
+    dotari = Dotare.query.all()
     if request.method == "POST":
-        data = request.form
         new_autoturism = Autoturism(
-            marca=data["marca"],
-            model=data["model"],
-            valoareOdometru=data["valoareOdometru"],
-            tipAutoturism=data["tipAutoturism"],
-            AnulFabricatiei=data["AnulFabricatiei"],
-            serieCaroserie=data["serieCaroserie"],
-            numarInmatriculare=data["numarInmatriculare"],
-            culoare=data["culoare"],
-            dataPrimeiImatirculari=data["dataPrimeiImatirculari"],
-            capacitateCilindrica=data["capacitateCilindrica"],
-            combustibil=data["combustibil"],
-            numarPropietariAnteriori=data["numarPropietariAnteriori"],
-            capacitateRezervorTermic=data.get("capacitateRezervorTermic"),
-            capacitateAutonomieBaterie=data.get("capacitateAutonomieBaterie"),
-            putereMotor=data["putereMotor"],
-            tipTransmisie=data["tipTransmisie"],
-            status=data["status"]
+            marca=request.form["marca"],
+            model=request.form["model"],
+            valoareOdometru=request.form["valoareOdometru"],
+            tipAutoturism=request.form["tipAutoturism"],
+            AnulFabricatiei=request.form["AnulFabricatiei"],
+            serieCaroserie=request.form["serieCaroserie"],
+            numarInmatriculare=request.form["numarInmatriculare"],
+            culoare=request.form["culoare"],
+            dataPrimeiImatirculari=request.form["dataPrimeiImatirculari"],
+            capacitateCilindrica=request.form["capacitateCilindrica"],
+            combustibil=request.form["combustibil"],
+            numarPropietariAnteriori=request.form["numarPropietariAnteriori"],
+            capacitateRezervorTermic=request.form.get("capacitateRezervorTermic"),
+            capacitateAutonomieBaterie=request.form.get("capacitateAutonomieBaterie"),
+            putereMotor=request.form["putereMotor"],
+            tipTransmisie=request.form["tipTransmisie"],
+            status=request.form["status"]
         )
         db.session.add(new_autoturism)
         db.session.commit()
-        flash("Autoturism created successfully.", "success")
-        return redirect(url_for("autoturism.list_autoturism"))
-    return render_template("autoturism/create_autoturism.html")
+        
+        selected_dotari = request.form.getlist("dotari")
+        for dotare_id in selected_dotari:
+            dotare = Dotare.query.get(dotare_id)
+            if dotare:
+                db.session.add(AutoturismDotari(new_autoturism.codAutoturism, dotare.codDotare))
+        db.session.commit()
+        
 
+        # Handle photo upload
+        if 'photos' in request.files:
+            photos = request.files.getlist('photos')
+            for photo in photos:
+                if photo.filename == '':
+                    continue
+                if photo and allowed_file(photo.filename):
+                    filename = secure_filename(photo.filename)
+                    relative_filepath = 'uploads/autoturisme/' + filename
+                    absolute_filepath = os.path.join(current_app.root_path, 'static', relative_filepath)
+                    os.makedirs(os.path.dirname(absolute_filepath), exist_ok=True)
+                    photo.save(absolute_filepath)
+                    new_photo = AutoturismFotografii(codAutoturism=new_autoturism.codAutoturism, caleDiscFotografie=relative_filepath, fotografiePrincipala=False)
+                    db.session.add(new_photo)
+            db.session.commit()
+
+        flash("Autoturism created successfully", "success")
+        return redirect(url_for("autoturism.list_autoturism"))
+    return render_template("autoturism/create_autoturism.html", dotari=dotari)
+
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    return '.' in filename and \
+            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 @autoturism_bp.route("/list", methods=["GET"])
 @login_required
 def list_autoturism():
@@ -62,7 +89,8 @@ def list_autoturism():
 def view_autoturism(autoturism_id):
     autoturism = Autoturism.query.get_or_404(autoturism_id)
     photos = db.session.query(AutoturismFotografii).where(AutoturismFotografii.codAutoturism == autoturism_id)
-    
+    dotari_auto = db.session.query(AutoturismDotari).where(AutoturismDotari.codAutoturism == autoturism_id)
+        
     return render_template("autoturism/view_autoturism.html", 
                             autoturism=autoturism,
                             fotografii = photos,

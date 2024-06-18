@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <h2 class="my-4">Create Autoturism</h2>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="marca" class="form-label">Marca</label>
             <input type="text" class="form-control" id="marca" name="marca" required>
@@ -46,7 +46,11 @@
         </div>
         <div class="mb-3">
             <label for="combustibil" class="form-label">Combustibil</label>
-            <input type="number" class="form-control" id="combustibil" name="combustibil" required>
+            <select class="form-select" id="combustibil" name="combustibil" required>
+                {% for key, value in {'1': 'Benzină', '2': 'Diesel', '3': 'Electrică', '4': 'Benzină + GPL', '5': 'Diesel + GNC', '6': 'Hibrid + Benzină', '7': 'Hibrid + Diesel', '9': 'Hidrogen'}.items() %}
+                <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="mb-3">
             <label for="numarPropietariAnteriori" class="form-label">Numar Propietari Anteriori</label>
@@ -66,11 +70,34 @@
         </div>
         <div class="mb-3">
             <label for="tipTransmisie" class="form-label">Tip Transmisie</label>
-            <input type="number" class="form-control" id="tipTransmisie" name="tipTransmisie" required>
+            <select class="form-select" id="tipTransmisie" name="tipTransmisie" required>
+                {% for key, value in {'1': 'Manuală', '2': 'Automată'}.items() %}
+                <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
-            <input type="number" class="form-control" id="status" name="status" required>
+            <select class="form-select" id="status" name="status" required>
+                {% for key, value in {'0': 'Neverificată', '1': 'Verificată', '2': 'În vânzare', '3': 'Vândută', '4': 'Retrasă'}.items() %}
+                <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="photos" class="form-label">Fotografii</label>
+            <input type="file" class="form-control" id="photos" name="photos" multiple>
+        </div>
+        <div class="mb-3">
+            <label for="dotari" class="form-label">Dotari</label>
+            <div class="form-check">
+                {% for dotare in dotari %}
+                <div>
+                    <input class="form-check-input" type="checkbox" id="dotare{{ dotare.codDotare }}" name="dotari" value="{{ dotare.codDotare }}">
+                    <label class="form-check-label" for="dotare{{ dotare.codDotare }}">{{ dotare.denumireDotare }}</label>
+                </div>
+                {% endfor %}
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
