@@ -31,7 +31,7 @@
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap" />
                 </svg>
-                <span class="fs-4"><img src="https://ireland.apollo.olxcdn.com/v1/files/eyJmbiI6IjI4OThyeXBkZm1yNDMtQVVUT1ZJVFJPIn0.LfyGOSKB_7REjLr8NsQygW0BK27kUtLssvK5n_F1opo/image" width="220" height="60" alt=""></span>
+                <span class="fs-4"><img src="{{ url_for('static', filename='/images/logo.jpg') }}" width="220" height="50" alt=""></span>
             </a>
             <ul class="nav nav-pills">
                 <li class="nav-item">
@@ -63,17 +63,14 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ url_for('autoturism.create_autoturism') }}">Adauga Autoturism</a></li>
                         <li><a class="dropdown-item" href="{{ url_for('autoturism.list_autoturism') }}">Lista Autoturisme</a></li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Dotari</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('dotari.list_dotari') }}">Lista Dotari</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
-                {% if current_user.is_authenticated and current_user.rol == 4 %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Utilizatori</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ url_for('user.list_users') }}">Lista Utilizatori</a></li>
-                        <li><a class="dropdown-item" href="{{ url_for('user.register') }}">Adauga Utilizator</a></li>
-                    </ul>
-                </li>
-                {% endif %}
                 <li class="nav-item">
                     <a href="#" class="nav-link">FAQs</a>
                 </li>

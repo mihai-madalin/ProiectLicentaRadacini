@@ -1,0 +1,73 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Lista Dotari{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="my-4">Lista Dotari</h2>
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createDotareModal">Adauga Dotare</button>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Denumire Dotare</th>
+                <th>Actiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dotare in dotari %}
+            <tr>
+                <td>{{ dotare.codDotare }}</td>
+                <td>{{ dotare.denumireDotare }}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editDotareModal{{ dotare.codDotare }}">Editeaza</button>
+                    <form action="{{ url_for('dotari.delete_dotare', codDotare=dotare.codDotare) }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">Sterge</button>
+                    </form>
+                </td>
+            </tr>
+
+            <!-- Edit Dotare Modal -->
+            <div class="modal fade" id="editDotareModal{{ dotare.codDotare }}" tabindex="-1" aria-labelledby="editDotareModalLabel{{ dotare.codDotare }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editDotareModalLabel{{ dotare.codDotare }}">Editeaza Dotare</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ url_for('dotari.edit_dotare', codDotare=dotare.codDotare) }}" method="POST">
+                                <div class="mb-3">
+                                    <label for="denumireDotare" class="form-label">Denumire Dotare</label>
+                                    <input type="text" class="form-control" id="denumireDotare" name="denumireDotare" value="{{ dotare.denumireDotare }}" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Salveaza</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Create Dotare Modal -->
+<div class="modal fade" id="createDotareModal" tabindex="-1" aria-labelledby="createDotareModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createDotareModalLabel">Adauga Dotare</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url_for('dotari.create_dotare') }}" method="POST">
+                    <div class="mb-3">
+                        <label for="denumireDotare" class="form-label">Denumire Dotare</label>
+                        <input type="text" class="form-control" id="denumireDotare" name="denumireDotare" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salveaza</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

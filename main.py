@@ -4,6 +4,7 @@ from db import db
 from blueprints.user import user_bp
 from blueprints.autoturism import autoturism_bp
 from blueprints.clienti import clienti_bp
+from blueprints.dotari import dotari_bp
 
 from models.utilizatori import Utilizator
 
@@ -21,6 +22,7 @@ login_manager.login_view = 'user.login'
 app.register_blueprint(user_bp, url_prefix='/user')
 app.register_blueprint(autoturism_bp, url_prefix='/autoturism')
 app.register_blueprint(clienti_bp, url_prefix='/clienti')
+app.register_blueprint(dotari_bp, url_prefix='/dotari')
 
 @app.route("/")
 def homePage():
