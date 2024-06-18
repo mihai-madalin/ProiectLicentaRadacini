@@ -66,7 +66,7 @@ def create_client_juridica():
         db.session.add(new_client)
         db.session.commit()
         flash("Client created successfully.", "success")
-        return redirect(url_for("clienti.list_clienti"))
+        return redirect(url_for("clienti.list_clienti_combined"))
     return render_template("clienti/create_client_persoana_juridica.html")
 
 # List ClientPersoanaFizica
@@ -168,6 +168,23 @@ def edit_client_juridica(client_id):
         db.session.commit()
         flash("Client updated successfully.", "success")
         return redirect(url_for("clienti.view_client_juridica", client_id=client.codClientPJ))
-    return render_template("clienti/edit_client_juridica.html", client=client)
+    return render_template("clienti/edit_client_persoana_juridica.html", client=client)
 
 
+@clienti_bp.route("/delete_client_fizica/<int:client_id>", methods=["POST"])
+@login_required
+def delete_client_fizica(client_id):
+    client = ClientPersoanaFizica.query.get_or_404(client_id)
+    db.session.delete(client)
+    db.session.commit()
+    flash("Clientul persoană fizică a fost șters cu succes", "success")
+    return redirect(url_for('clienti.list_clienti_fizici'))
+
+@clienti_bp.route("/delete_client_juridica/<int:client_id>", methods=["POST"])
+@login_required
+def delete_client_juridica(client_id):
+    client = ClientPersoanaJuridica.query.get_or_404(client_id)
+    db.session.delete(client)
+    db.session.commit()
+    flash("Clientul persoană juridică a fost șters cu succes", "success")
+    return redirect(url_for('clienti.list_clienti_juridici'))

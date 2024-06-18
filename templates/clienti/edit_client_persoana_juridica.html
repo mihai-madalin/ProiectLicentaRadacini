@@ -1,8 +1,8 @@
 {% extends "/components/base_user.html" %}
-{% block title %}Edit Client Persoana Juridică{% endblock %}
+{% block title %}Editează Client Persoana Juridică{% endblock %}
 {% block content %}
 <div class="container">
-    <h2 class="my-4">Edit Client Persoana Juridică</h2>
+    <h2 class="my-4">Editează Client Persoana Juridică</h2>
     <form method="POST">
         <div class="row">
             <div class="col-md-6 mb-3">
@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="CUI" class="form-label">Cod Unic de Identificare</label>
-                <input type="text" class="form-control" id="CUI" name="CUI" value="{{ client.CUI }}" required>
+                <input type="text" class="form-control" id="CUI" name="CUI" value="{{ client.CUI }}" required pattern="\d+">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="SucursalaBancii" class="form-label">Banca Emitentă</label>
@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="IBAN" class="form-label">Cont Bancar</label>
-                <input type="text" class="form-control" id="IBAN" name="IBAN" value="{{ client.IBAN }}" required>
+                <input type="text" class="form-control" id="IBAN" name="IBAN" value="{{ client.IBAN }}" required pattern="[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="Tara" class="form-label">Țara</label>
@@ -75,11 +75,11 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="telefonReprezentant" class="form-label">Numar Telefon</label>
-                <input type="text" class="form-control" id="telefonReprezentant" name="telefonReprezentant" value="{{ client.telefonReprezentant }}" required>
+                <input type="text" class="form-control" id="telefonReprezentant" name="telefonReprezentant" value="{{ client.telefonReprezentant }}" maxlength="10">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="CNPReprezentant" class="form-label">Cod Numeric Personal</label>
-                <input type="text" class="form-control" id="CNPReprezentant" name="CNPReprezentant" value="{{ client.CNPReprezentant }}" required>
+                <input type="text" class="form-control" id="CNPReprezentant" name="CNPReprezentant" value="{{ client.CNPReprezentant }}" required pattern="\d{13}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="judetReprezentant" class="form-label">Județ</label>

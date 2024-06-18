@@ -20,13 +20,13 @@
                     {% if client.type == 'fizica' %}
                     <a href="{{ url_for('clienti.view_client_fizica', client_id=client.id) }}" class="btn btn-info">Vizualizează</a>
                     <a href="{{ url_for('clienti.edit_client_fizica', client_id=client.id) }}" class="btn btn-warning">Editează</a>
-                    <form action="" method="POST" style="display:inline;">
+                    <form action="{{ url_for('clienti.delete_client_fizica', client_id=client.id) }}" method="POST" onsubmit="return confirm('Ești sigur că vrei să ștergi acest client?');" style="display:inline;">
                         <button type="submit" class="btn btn-danger">Șterge</button>
                     </form>
                     {% else %}
                     <a href="{{ url_for('clienti.view_client_juridica', client_id=client.id) }}" class="btn btn-info">Vizualizează</a>
                     <a href="{{ url_for('clienti.edit_client_juridica', client_id=client.id) }}" class="btn btn-warning">Editează</a>
-                    <form action="" method="POST" style="display:inline;">
+                    <form action="{{ url_for('clienti.delete_client_juridica', client_id=client.id) }}" method="POST" onsubmit="return confirm('Ești sigur că vrei să ștergi acest client?');" style="display:inline;">
                         <button type="submit" class="btn btn-danger">Șterge</button>
                     </form>
                     {% endif %}
