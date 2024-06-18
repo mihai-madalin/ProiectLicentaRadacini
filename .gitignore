@@ -1,5 +1,29 @@
-# Ignore all pycache folders
-__pycache__/*
+# Ignore all uploaded photos
+/static/uploads/autoturisme/*
 
-# Ignore all files and folders within the autoturisme folder
-uploads/autoturisme/*
+# If you want to ignore all uploaded photos in any subdirectory of /static/uploads/
+# you can use the following pattern
+/static/uploads/**/*.png
+/static/uploads/**/*.jpg
+/static/uploads/**/*.jpeg
+/static/uploads/**/*.gif
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore Python compiled files
+*.pyc
+__pycache__/
+
+# Ignore virtual environments
+venv/
+.env
+
+# Ignore IDE specific files
+.idea/
+.vscode/
+*.iml
+
+# Ignore logs
+*.log
