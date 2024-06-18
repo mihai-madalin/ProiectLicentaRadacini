@@ -31,7 +31,7 @@ CREATE TABLE `Autototurisme` (
   `valoareOdometru` int(10) NOT NULL,
   `tipAutoturism` int(3) NOT NULL,
   `AnulFabricatiei` int(4) NOT NULL,
-  `serieCaroserie` varchar(13) NOT NULL,
+  `serieCaroserie` varchar(17) NOT NULL,
   `numarInmatriculare` varchar(10) NOT NULL,
   `culoare` varchar(50) NOT NULL,
   `dataPrimeiImatirculari` date NOT NULL,
@@ -205,9 +205,9 @@ ALTER TABLE `ComponenteFactura` ADD FOREIGN KEY (`NumarFactura`, `SerieFactura`)
 
 ALTER TABLE `FacturaFiscala` ADD FOREIGN KEY (`ResponsabilIntocmire`) REFERENCES `Utilizatori` (`codUtilizator`);
 
-ALTER TABLE `AutoturismeDotari` ADD FOREIGN KEY (`codAutoturism`) REFERENCES `Autototurisme` (`codAutoturism`);
+ALTER TABLE `AutoturismeDotari` ADD FOREIGN KEY (`codAutoturism`) REFERENCES `Autototurisme` (`codAutoturism`)   ON DELETE CASCADE ON UPDATE CASCADE; 
 
-ALTER TABLE `AutoturismeDotari` ADD FOREIGN KEY (`codDotare`) REFERENCES `Dotari` (`codDotare`);
+ALTER TABLE `AutoturismeDotari` ADD FOREIGN KEY (`codDotare`) REFERENCES `Dotari` (`codDotare`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `AutoturismeFotografii` ADD FOREIGN KEY (`codAutoturism`) REFERENCES `Autototurisme` (`codAutoturism`);
 
@@ -250,3 +250,13 @@ ALTER TABLE `ContracteVanzareCumparare` ADD FOREIGN KEY (`codInternCumparatorPer
 ALTER TABLE `ContracteVanzareCumparare` ADD FOREIGN KEY (`codInternCumparatorPersaonaFizica`) REFERENCES `ClientiPersoaneFizice` (`codClientPF`);
 
 ALTER TABLE `ContracteVanzareCumparare` ADD FOREIGN KEY (`codInternVanzatorPersoanaFizica`) REFERENCES `ClientiPersoaneFizice` (`codClientPF`);
+
+
+
+ALTER TABLE `radacini_db`.`autoturismedotari` 
+DROP FOREIGN KEY `autoturismedotari_ibfk_1`;
+ALTER TABLE `radacini_db`.`autoturismedotari` 
+ADD CONSTRAINT `autoturismedotari_ibfk_1`
+  FOREIGN KEY (`codAutoturism`)
+  REFERENCES `radacini_db`.`autototurisme` (`codAutoturism`)
+

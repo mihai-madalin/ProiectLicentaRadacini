@@ -90,10 +90,18 @@ def view_autoturism(autoturism_id):
     autoturism = Autoturism.query.get_or_404(autoturism_id)
     photos = db.session.query(AutoturismFotografii).where(AutoturismFotografii.codAutoturism == autoturism_id)
     dotari_auto = db.session.query(AutoturismDotari).where(AutoturismDotari.codAutoturism == autoturism_id)
+    print(dotari_auto)
+    dotari_cu_nume = []
+    
+    for dotarea_mea in dotari_auto:
+        dotare_selectata = db.session.query(Dotare).where(Dotare.codDotare == dotarea_mea.codDotare).first()
+        dotari_cu_nume.append(dotare_selectata)
+        
         
     return render_template("autoturism/view_autoturism.html", 
                             autoturism=autoturism,
                             fotografii = photos,
+                            dotari_auto = dotari_cu_nume,
                             tipAutoturism = get_tip_autoturism(autoturism.tipAutoturism))
 
 # @autoturism_bp.route("/edit/<int:autoturism_id>", methods=["GET", "POST"])

@@ -75,8 +75,8 @@
 
     <h3 class="my-4">Dotări</h3>
     <ul class="list-group">
-        {% for dotare in autoturism.dotari %}
-        <li class="list-group-item">{{ dotare.dotare.name }}</li>
+        {% for dotare in dotari_auto %}
+        <li class="list-group-item">{{ dotare.denumireDotare }}</li>
         {% endfor %}
     </ul>
 </div>
