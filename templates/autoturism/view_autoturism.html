@@ -1,106 +1,100 @@
 {% extends "/components/base_user.html" %}
-{% block title %}Vizualizare Autoturism{% endblock %}
+{% block title %}{{ autoturism.marca }} {{ autoturism.model }} {{ autoturism.AnulFabricatiei }}{% endblock %}
 {% block content %}
-<div class="container">
-    <h2 class="my-4">Autoturism nou</h2>
-    <form>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="marca" class="form-label">Marca</label>
-                <input type="text" class="form-control" id="marca" name="marca" value="{{ autoturism.marca }}" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="combustibil" class="form-label">Combustibil</label>
-                <select class="form-select" id="combustibil" name="combustibil" disabled>
-                    <option value="1" {% if autoturism.combustibil == 1 %} selected {% endif %}>Benzină</option>
-                    <option value="2" {% if autoturism.combustibil == 2 %} selected {% endif %}>Diesel</option>
-                    <option value="3" {% if autoturism.combustibil == 3 %} selected {% endif %}>Electrică</option>
-                    <option value="4" {% if autoturism.combustibil == 4 %} selected {% endif %}>Benzină + GPL</option>
-                    <option value="5" {% if autoturism.combustibil == 5 %} selected {% endif %}>Diesel + GNC</option>
-                    <option value="6" {% if autoturism.combustibil == 6 %} selected {% endif %}>Hibrid + Benzină</option>
-                    <option value="7" {% if autoturism.combustibil == 7 %} selected {% endif %}>Hibrid + Diesel</option>
-                    <option value="9" {% if autoturism.combustibil == 9 %} selected {% endif %}>Hidrogen</option>
-                </select>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="model" class="form-label">Model</label>
-                <input type="text" class="form-control" id="model" name="model" value="{{ autoturism.model }}" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="transmisie" class="form-label">Transmisie</label>
-                <select class="form-select" id="transmisie" name="transmisie" disabled>
-                    <option value="1" {% if autoturism.tipTransmisie == 1 %} selected {% endif %}>Manuală</option>
-                    <option value="2" {% if autoturism.tipTransmisie == 2 %} selected {% endif %}>Automată</option>
-                </select>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="numarInmatriculare" class="form-label">Număr Înmatriculare</label>
-                <input type="text" class="form-control" id="numarInmatriculare" name="numarInmatriculare" value="{{ autoturism.numarInmatriculare }}" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="capacitateCilindrica" class="form-label">Capacitate Cilindrică</label>
-                <input type="text" class="form-control" id="capacitateCilindrica" name="capacitateCilindrica" value="{{ autoturism.capacitateCilindrica }}" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="AnulFabricatiei" class="form-label">Anul Fabricației</label>
-                <input type="text" class="form-control" id="AnulFabricatiei" name="AnulFabricatiei" value="{{ autoturism.AnulFabricatiei }}" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="capacitateRezervor" class="form-label">Capacitate Rezervor</label>
-                <input type="text" class="form-control" id="capacitateRezervor" name="capacitateRezervor" value="{{ autoturism.capacitateRezervorTermic }}" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="serieCaroserie" class="form-label">Serie Caroserie</label>
-                <input type="text" class="form-control" id="serieCaroserie" name="serieCaroserie" value="{{ autoturism.serieCaroserie }}" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="putereMotor" class="form-label">Putere (kW)</label>
-                <input type="text" class="form-control" id="putereMotor" name="putereMotor" value="{{ autoturism.putereMotor }}" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="valoareOdometru" class="form-label">Valoare Odometru</label>
-                <input type="text" class="form-control" id="valoareOdometru" name="valoareOdometru" value="{{ autoturism.valoareOdometru }}" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="culoare" class="form-label">Culoare</label>
-                <input type="text" class="form-control" id="culoare" name="culoare" value="{{ autoturism.culoare }}" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="dataPrimeiImatirculari" class="form-label">Data Primei Înmatriculări</label>
-                <input type="text" class="form-control" id="dataPrimeiImatirculari" name="dataPrimeiImatirculari" value="{{ autoturism.dataPrimeiImatirculari }}" readonly>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="status" class="form-label">Status Intern</label>
-                <select class="form-select" id="status" name="status" disabled>
-                    <option value="0" {% if autoturism.status == 0 %} selected {% endif %}>Neverificată</option>
-                    <option value="1" {% if autoturism.status == 1 %} selected {% endif %}>Verificată</option>
-                    <option value="2" {% if autoturism.status == 2 %} selected {% endif %}>În vânzare</option>
-                    <option value="3" {% if autoturism.status == 3 %} selected {% endif %}>Vândută</option>
-                    <option value="4" {% if autoturism.status == 4 %} selected {% endif %}>Retrasă</option>
-                </select>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="numarPropietariAnteriori" class="form-label">Număr Proprietari Anteriori</label>
-                <input type="text" class="form-control" id="numarPropietariAnteriori" name="numarPropietariAnteriori" value="{{ autoturism.numarPropietariAnteriori }}" readonly>
+<div class="container mt-4">
+    <h2 class="my-4">{{ autoturism.marca }} {{ autoturism.model }} {{ autoturism.AnulFabricatiei }}</h2>
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for fotografie in fotografii %}
+                    <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                        <a href="{{ url_for('static', filename=fotografie.caleDiscFotografie) }}">
+                            <img src="{{ url_for('static', filename=fotografie.caleDiscFotografie) }}" class="d-block w-100 carousel-image" alt="...">
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
+    </div>
 
-        <h3>Fotografii</h3>
-        <div class="row">
-            {% for fotografie in fotografii %}
-            <div class="col-md-2 mb-3">
-                <img src="{{ url_for('static', filename=fotografie.caleDiscFotografie) }}" alt="Foto" class="img-fluid">
-            </div>
-            {% endfor %}
+    <h4>Specificații Tehnice</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Marca:</strong> {{ autoturism.marca }}</li>
+                <li class="list-group-item"><strong>Model:</strong> {{ autoturism.model }}</li>
+                <li class="list-group-item"><strong>Capacitate Cilindrică:</strong> {{ autoturism.capacitateCilindrica }}</li>
+                <li class="list-group-item"><strong>Putere Motor (kW):</strong> {{ autoturism.putereMotor }}</li>
+                <li class="list-group-item"><strong>Valoare Odometru:</strong> {{ autoturism.valoareOdometru }}</li>
+                <li class="list-group-item"><strong>Data Primei Înmatriculări:</strong> {{ autoturism.dataPrimeiImatirculari }}</li>
+                <li class="list-group-item"><strong>Număr Proprietari Anteriori:</strong> {{ autoturism.numarPropietariAnteriori }}</li>
+            </ul>
         </div>
+        <div class="col-md-6">
+            <ul class="list-group">
+                {% set COMBUSTIBIL = {1: "Benzină", 2: "Diesel", 3: "Electrică", 4: "Benzină + GPL", 5: "Diesel + GNC", 6: "Hibrid + Benzină", 7: "Hibrid + Diesel", 9: "Hidrogen"} %}
+                {% set TRANSMISIE = {1: "Manuală", 2: "Automată"} %}
+                {% set STATUS = {0: "Neverificată", 1: "Verificată", 2: "În vânzare", 3: "Vândută", 4: "Retrasă"} %}
+                
+                <li class="list-group-item"><strong>Combustibil:</strong> {{ COMBUSTIBIL.get(autoturism.combustibil, "Necunoscut") }}</li>
+                <li class="list-group-item"><strong>Transmisie:</strong> {{ TRANSMISIE.get(autoturism.tipTransmisie, "Necunoscut") }}</li>
+                <li class="list-group-item"><strong>Serie Caroserie:</strong> {{ autoturism.serieCaroserie }}</li>
+                <li class="list-group-item"><strong>Culoare:</strong> {{ autoturism.culoare }}</li>
+                <li class="list-group-item"><strong>Status Intern:</strong> {{ STATUS.get(autoturism.status, "Necunoscut") }}</li>
+                <li class="list-group-item"><strong>Anul Fabricatiei:</strong> {{ autoturism.AnulFabricatiei }}</li>
+                
+                {% if autoturism.combustibil == 3 %}
+                <li class="list-group-item"><strong>Capacitate Baterie (kWh):</strong> {{ autoturism.capacitateAutonomieBaterie }}</li>
+                {% else %}
+                <li class="list-group-item"><strong>Capacitate Rezervor:</strong> {{ autoturism.capacitateRezervorTermic }}</li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
 
-        <h3>Dotări</h3>
-        <ul class="list-unstyled">
-            {% for dotare in autoturism.dotari %}
-            <li>{{ dotare.dotare.name }}</li>
-            {% endfor %}
-        </ul>
-        <a href="{{ url_for('autoturism.upload_photos', autoturism_id=autoturism.codAutoturism) }}" class="btn btn-warning">Upload Photos</a>
-    </form>
+    <h3 class="my-4">Fotografii</h3>
+    <div class="row">
+        {% for fotografie in fotografii %}
+        <div class="col-md-2 mb-3">
+            <a href="{{ url_for('static', filename=fotografie.caleDiscFotografie) }}" data-lightbox="autoturism-gallery">
+                <img src="{{ url_for('static', filename=fotografie.caleDiscFotografie) }}" alt="Foto" class="img-fluid photo-thumbnail">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3 class="my-4">Dotări</h3>
+    <ul class="list-group">
+        {% for dotare in autoturism.dotari %}
+        <li class="list-group-item">{{ dotare.dotare.name }}</li>
+        {% endfor %}
+    </ul>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+<style>
+    .carousel-image {
+        height: 400px; /* Set the desired height */
+        width: 100%; /* Set the desired width */
+        object-fit: cover; /* Ensures the image covers the area without distortion */
+    }
+    .photo-thumbnail {
+        height: 150px; /* Set the desired height */
+        width: 150px; /* Set the desired width */
+        object-fit: cover; /* Ensures the image covers the area without distortion */
+    }
+</style>
 {% endblock %}
