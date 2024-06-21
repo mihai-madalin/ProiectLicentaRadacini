@@ -3,7 +3,7 @@ from db import db
 class Test(db.Model):
     __tablename__ = 'teste'
 
-    codTeste = db.Column(db.Integer, primary_key=True)
+    codTest = db.Column(db.Integer, primary_key=True)
     codCategorieTest = db.Column(db.Integer, db.ForeignKey('categorieteste.codCategorieTeste'))
     DenumireTest = db.Column(db.String(255), nullable=False)
 
@@ -14,7 +14,7 @@ class Test(db.Model):
     @property
     def serialize(self):
         return {
-            'codTeste': self.codTeste,
+            'codTest': self.codTeste,
             'codCategorieTest': self.codCategorieTest,
             'DenumireTest': self.DenumireTest,
         }

@@ -10,18 +10,7 @@ CREATE TABLE `Utilizatori` (
   `reseteazaParola` bool NOT NULL
 );
 
-INSERT INTO `Utilizatori` VALUES (
-  1,
-  'mihai.madalin@gmail.com',
-  /*Parola_01 Criptata folosind BCrypt*/
-  'scrypt:32768:8:1$n9OVZW1gNXfiDCYO$9025194d58ea3b65e26b69007617fdacff0596a6880ddcb0cc82ceb4b55942af7115232c1ef90d2b75cf513af0f40840eb73541560c351126eb3a5054f435121',
-  '4',
-  'Neculai',
-  'Mihaita Madalin',
-  'XR',
-  '111111',
-  0
-  );
+
 
 
 CREATE TABLE `Autototurisme` (
@@ -148,9 +137,14 @@ CREATE TABLE `CategorieTeste` (
 );
 
 CREATE TABLE `Teste` (
-  `codTeste` int(8) PRIMARY KEY AUTO_INCREMENT,
-  `codCategorieTest` int(8),
+  `codTest` int(8) PRIMARY KEY AUTO_INCREMENT,
   `DenumireTest` varchar(255) NOT NULL
+);
+
+CREATE TABLE `TotalTeste` (
+  `codTotalTest` int(8) PRIMARY KEY AUTO_INCREMENT,
+  `codCategorieTest` int(8) NOT NULL,
+  `codTest` int(8) NOT NULL
 );
 
 CREATE TABLE `OferteVanzare` (
@@ -221,11 +215,10 @@ ALTER TABLE `Programari` ADD FOREIGN KEY (`codClientPersoanaFizica`) REFERENCES 
 
 ALTER TABLE `Inspectii` ADD FOREIGN KEY (`codProgramre`) REFERENCES `Programari` (`codProgramare`);
 
-ALTER TABLE `Teste` ADD FOREIGN KEY (`codCategorieTest`) REFERENCES `CategorieTeste` (`codCategorieTeste`);
 
 ALTER TABLE `InspectiiTeste` ADD FOREIGN KEY (`codInspectie`) REFERENCES `Inspectii` (`codInspectie`);
 
-ALTER TABLE `InspectiiTeste` ADD FOREIGN KEY (`codTest`) REFERENCES `Teste` (`codTeste`);
+ALTER TABLE `InspectiiTeste` ADD FOREIGN KEY (`codTest`) REFERENCES `Teste` (`codTest`);
 
 ALTER TABLE `OferteVanzare` ADD FOREIGN KEY (`codAutorism`) REFERENCES `Autototurisme` (`codAutoturism`);
 
@@ -252,11 +245,36 @@ ALTER TABLE `ContracteVanzareCumparare` ADD FOREIGN KEY (`codInternCumparatorPer
 ALTER TABLE `ContracteVanzareCumparare` ADD FOREIGN KEY (`codInternVanzatorPersoanaFizica`) REFERENCES `ClientiPersoaneFizice` (`codClientPF`);
 
 
+ALTER TABLE `TotalTeste` ADD FOREIGN KEY (`codCategorieTest`) REFERENCES `CategorieTeste` (`codCategorieTeste`);
+
+ALTER TABLE `TotalTeste` ADD FOREIGN KEY (`codTest`) REFERENCES `Teste` (`codTest`);
+
 
 ALTER TABLE `radacini_db`.`autoturismedotari` 
 DROP FOREIGN KEY `autoturismedotari_ibfk_1`;
 ALTER TABLE `radacini_db`.`autoturismedotari` 
 ADD CONSTRAINT `autoturismedotari_ibfk_1`
   FOREIGN KEY (`codAutoturism`)
-  REFERENCES `radacini_db`.`autototurisme` (`codAutoturism`)
+  REFERENCES `radacini_db`.`autototurisme` (`codAutoturism`);
+
+
+INSERT INTO `Utilizatori` VALUES (
+  1,
+  'mihai.madalin@gmail.com',
+  /*Parola_01 Criptata folosind BCrypt*/
+  'scrypt:32768:8:1$n9OVZW1gNXfiDCYO$9025194d58ea3b65e26b69007617fdacff0596a6880ddcb0cc82ceb4b55942af7115232c1ef90d2b75cf513af0f40840eb73541560c351126eb3a5054f435121',
+  '4',
+  'Neculai',
+  'Mihaita Madalin',
+  'XR',
+  '111111',
+  0
+  );
+
+  INSERT INTO tipAutoturisme VALUES(1, 'SUV');
+  INSERT INTO tipAutoturisme VALUES(2, 'Compact');
+  INSERT INTO tipAutoturisme VALUES(3, 'Berlina');
+  INSERT INTO tipAutoturisme VALUES(4, 'Break');
+  INSERT INTO tipAutoturisme VALUES(5, 'Coupe');
+  INSERT INTO tipAutoturisme VALUES(6, 'Decapotabila');
 
