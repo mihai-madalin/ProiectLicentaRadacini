@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/datatables.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <title>{% block title %}{% endblock %}</title>
     <style>
         /* CSS preluat de pe site-ul https://mdbootstrap.com/docs/standard/extended/dropdown-multilevel/ 
@@ -143,5 +146,33 @@
         </footer>
     </div>
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            let table = new DataTable('#lista', {
+                language: {
+                    // url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/ro.json'
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        text: 'PDF',
+                        titleAttr: 'Exportă tabelul ca PDF'
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Excel',
+                        titleAttr: 'Exportă tabelul ca Excel'
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Tipareste',
+                        titleAttr: 'Printează tabelul'
+                    }
+                ]
+            });
+        });
+    </script>
 </body>
 </html>
