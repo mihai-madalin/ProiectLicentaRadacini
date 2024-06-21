@@ -1,0 +1,69 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Lista Programari{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="my-4">Lista Programari</h2>
+    <a href="{{ url_for('programari.create_programare') }}" class="btn btn-primary mb-3">Adaugă Programare</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tip Programare</th>
+                <th>Data Programare</th>
+                <th>Număr Înmatriculare</th>
+                <th>Client</th>
+                <th>Telefon Client</th>
+                <th>Responsabil Întocmire</th>
+                <th>Status Programare</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for programare in programari %}
+            <tr>
+                <td>{{ programare.codProgramare }}</td>
+               
+                    <td>
+                        {% if programare.tipProgramre == 1 %}
+                        <a href="{{url_for('programari.edit_programare', programare_id=programare.codProgramare)}}">Programare Vizionare Mașină</a>
+                        {% else %}
+                        <a href="{{url_for('programari.edit_programare', programare_id=programare.codProgramare)}}">  Programare Inspecție Mașină </a>
+                        {% endif %}
+                    </td>
+               
+                <td>{{ programare.dataProgramare }}</td>
+                <td>{{ programare.autoturism.numarInmatriculare }}</td>
+                <td>
+                    {% if programare.codClientPersoanaFizica %}
+                        {{ programare.client.nume }} {{ programare.client.prenume }}
+                    {% else %}
+                        {{ programare.client.Nume }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if programare.codClientPersoanaFizica %}
+                        {{ programare.client.telefon }}
+                    {% else %}
+                        {{ programare.client.telefonReprezentant }}
+                    {% endif %}
+                </td>
+                <td>{{ programare.responsabil.nume }} {{ programare.responsabil.prenume }}</td>
+                <td>
+                    <button class="btn 
+                        {% if programare.statusProgramre == 1 %}btn-secondary
+                        {% elif programare.statusProgramre == 2 %}btn-primary
+                        {% elif programare.statusProgramre == 3 %}btn-success
+                        {% elif programare.statusProgramre == 4 %}btn-danger
+                        {% endif %}">
+                        {% if programare.statusProgramre == 1 %}Creată
+                        {% elif programare.statusProgramre == 2 %}Confirmată
+                        {% elif programare.statusProgramre == 3 %}Realizată
+                        {% elif programare.statusProgramre == 4 %}Anulată
+                        {% endif %}
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

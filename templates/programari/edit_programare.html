@@ -1,0 +1,57 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Editează Programare{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Editează Programare</h2>
+    <form method="POST">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="tipProgramare" class="form-label">Tip Programare</label>
+                <select id="tipProgramare" name="tipProgramare" class="form-select" {% if programare.statusProgramre in [3, 4] %}disabled{% endif %}>
+                    <option value="1" {% if programare.tipProgramre == 1 %}selected{% endif %}>Programare Vizionare Mașină</option>
+                    <option value="2" {% if programare.tipProgramre == 2 %}selected{% endif %}>Programare Inspecție Mașină</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="dataProgramare" class="form-label">Data Programare</label>
+                <input type="datetime-local" id="dataProgramare" name="dataProgramare" class="form-control" value="{{ programare.dataProgramare.isoformat() }}" {% if programare.statusProgramre in [3, 4] %}readonly{% endif %}>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codAutoturism" class="form-label">Autoturism</label>
+                <select id="codAutoturism" name="codAutoturism" class="form-select" {% if programare.statusProgramre in [3, 4] %}disabled{% endif %}>
+                    {% for autoturism in autoturisme %}
+                    <option value="{{ autoturism.codAutoturism }}" {% if autoturism.codAutoturism == programare.codAutoturism %}selected{% endif %}>{{ autoturism.marca }} {{ autoturism.model }} |  {{autoturism.numarInmatriculare}} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="statusProgramre" class="form-label">Status Programare</label>
+                <select name="statusProgramre" id="statusProgramre" class="form-select" {% if programare.statusProgramre in [3, 4] %}disabled{% endif %}>
+                    {% for status in range(programare.statusProgramre, 5) %}
+                    <option value="{{ status }}" {% if status == programare.statusProgramre %}selected{% endif %}>
+                        {% if status == 1 %}Creată
+                        {% elif status == 2 %}Confirmată
+                        {% elif status == 3 %}Realizată
+                        {% elif status == 4 %}Anulată
+                        {% endif %}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="client" class="form-label">Client</label>
+                <input type="text" class="form-control" value="{% if programare.codClientPersoanaFizica %}{{ programare.client.nume }} {{ programare.client.prenume }}{% else %}{{ programare.client.Nume }}{% endif %}" readonly>
+                <input type="hidden" name="codClient" value="{% if programare.codClientPersoanaFizica %}{{ programare.codClientPersoanaFizica }}{% else %}{{ programare.codClientPersoanaJuridica }}{% endif %}">
+            </div>
+        </div>
+        {% if programare.statusProgramre not in [3, 4] %}
+        <button type="submit" class="btn btn-primary">Salvează</button>
+        {% endif %}
+        {% if programare.tipProgramre == 1 %}
+        <a href="" class="btn btn-secondary">Mergi la ofertă</a>
+        {% elif programare.tipProgramre == 2 %}
+        <a href="" class="btn btn-secondary">Mergi la inspecție</a>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

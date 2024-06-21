@@ -1,0 +1,74 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Creează Programare{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Creează o nouă Programare</h2>
+    <form method="POST">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="tipProgramare" class="form-label">Tip Programare</label>
+                <select id="tipProgramare" name="tipProgramare" class="form-select">
+                    <option value="1">Programare Vizionare Mașină</option>
+                    <option value="2">Programare Inspecție Mașină</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="dataProgramare" class="form-label">Data Programare</label>
+                <input type="datetime-local" id="dataProgramare" name="dataProgramare" class="form-control">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codAutoturism" class="form-label">Autoturism</label>
+                <select id="codAutoturism" name="codAutoturism" class="form-select">
+                    {% for autoturism in autoturisme %}
+                    <option value="{{ autoturism.codAutoturism }}">{{ autoturism.marca }} {{ autoturism.model }} |  {{autoturism.numarInmatriculare}} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="statusProgramre" class="form-label">Status Programare</label>
+                <select name="statusProgramre" id="statusProgramre" class="form-select">
+                    <option value="1">Creată</option>
+                    <option value="2">Confirmata</option>
+                    <option value="3">Realizata</option>
+                    <option value="4">Anulata</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="clientType" class="form-label">Tip Client</label>
+                <div>
+                    <input type="radio" id="pf" name="clientType" value="pf" onclick="showClientSelect('pf')"> Persoană Fizică
+                    <input type="radio" id="pj" name="clientType" value="pj" onclick="showClientSelect('pj')"> Persoană Juridică
+                </div>
+            </div>
+            <div id="clientSelectPF" class="col-md-6 mb-3" style="display:none;">
+                <label for="codClientPF" class="form-label">Client Persoană Fizică</label>
+                <select id="codClientPF" name="codClientPF" class="form-select">
+                    {% for client in clienti_persoane_fizice %}
+                    <option value="{{ client.codClientPF }}">{{ client.nume }} {{ client.prenume }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div id="clientSelectPJ" class="col-md-6 mb-3" style="display:none;">
+                <label for="codClientPJ" class="form-label">Client Persoană Juridică</label>
+                <select id="codClientPJ" name="codClientPJ" class="form-select">
+                    {% for client in clienti_persoane_juridice %}
+                    <option value="{{ client.codClientPJ }}">{{ client.Nume }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvează</button>
+    </form>
+    <script>
+        function showClientSelect(type) {
+            if (type === 'pf') {
+                document.getElementById('clientSelectPF').style.display = 'block';
+                document.getElementById('clientSelectPJ').style.display = 'none';
+            } else if (type === 'pj') {
+                document.getElementById('clientSelectPF').style.display = 'none';
+                document.getElementById('clientSelectPJ').style.display = 'block';
+            }
+        }
+    </script>
+</div>
+{% endblock %}
