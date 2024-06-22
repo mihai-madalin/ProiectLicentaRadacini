@@ -43,6 +43,21 @@ def create_autoturism():
             tipTransmisie=request.form["tipTransmisie"],
             status=request.form["status"]
         )
+
+        if(new_autoturism.combustibil == 3):
+            new_autoturism.capacitateRezervorTermic = None
+        elif(new_autoturism.combustibil in [1,2,4,5,9]):
+            new_autoturism.capacitateAutonomieBaterie = None
+
+# Coduri Carburant
+# /1 Benzina
+# /2 Diesel
+# e3 Electric 
+# /4 Ben + GPL
+# /5 Diesel + GNC
+# /e6 Hibrid + Ben
+# /e7 Hibrid + Die  
+# /9 Hidrogen 
         db.session.add(new_autoturism)
         db.session.commit()
         
