@@ -38,7 +38,7 @@
             </a>
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a href="/" class="nav-link active" aria-current="page">Acasa</a>
+                    <a href="/" class="nav-link" aria-current="page">Acasa</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clienti</a>
@@ -74,14 +74,41 @@
                         </li>
                     </ul>
                 </li>
-                {% if current_user.is_authenticated and current_user.rol == 4 %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Utilizatori</a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Programari</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ url_for('user.list_users') }}">Lista Utilizatori</a></li>
-                        <li><a class="dropdown-item" href="{{ url_for('user.register') }}">Adauga Utilizator</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('programari.create_programare') }}">Adauga Programare</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('programari.list_programari') }}">Lista Autoturisme</a></li>  
                     </ul>
                 </li>
+                {% if current_user.is_authenticated and current_user.rol == 4 %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Administrativ</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Utilizatori</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('user.list_users') }}">Lista Utilizatori</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('user.register') }}">Adauga Utilizator</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Teste Inspectie</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('teste.list_teste') }}">Lista Teste Inspectie</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Categorii Teste Inspectie</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('categorie_teste.create_categorie_teste') }}">Adauga Categorie Teste Inspectie</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('categorie_teste.list_categorii_teste') }}">Lista  Categorie Teste Inspectie</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+
                 {% endif %}
                 <li class="nav-item">
                     {% if current_user.is_authenticated %}

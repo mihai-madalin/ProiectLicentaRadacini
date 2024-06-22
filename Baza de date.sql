@@ -40,7 +40,7 @@ CREATE TABLE `tipAutoturisme` (
 );
 
 CREATE TABLE `AutoturismeDotari` (
-  `codAutoturismDotari` int(8) PRIMARY KEY,
+  `codAutoturismDotari` int(8) PRIMARY KEY AUTO_INCREMENT,
   `codAutoturism` int(8) NOT NULL,
   `codDotare` int(8) NOT NULL
 );
