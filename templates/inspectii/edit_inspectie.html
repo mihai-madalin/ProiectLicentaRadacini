@@ -1,0 +1,22 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Editează Inspecție{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="my-4">Editează Inspecție</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="NumarInmatriculare" class="form-label">Număr Înmatriculare</label>
+            <input type="text" class="form-control" id="NumarInmatriculare" name="NumarInmatriculare" value="{{ inspectie.NumarInmatriculare }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="DataInspectiei" class="form-label">Data Inspecției</label>
+            <input type="datetime-local" class="form-control" id="DataInspectiei" name="DataInspectiei" value="{{ inspectie.DataInspectiei.isoformat() }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="ValoareOdometru" class="form-label">Valoare Odometru</label>
+            <input type="number" class="form-control" id="ValoareOdometru" name="ValoareOdometru" value="{{ inspectie.ValoareOdometru }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvează</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Creează Inspecție (Faza 2){% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="my-4">Creează Inspecție (Faza 2)</h2>
+    <form method="POST">
+        {% for categorie in categorii_teste %}
+        <h3>{{ categorie.DenumireCategorieTeste }}</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Selecție</th>
+                    <th>ID Test</th>
+                    <th>Denumire Test</th>
+                    <th>Rezultat</th>
+                    <th>Detalii</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for test in categorie.teste %}
+                <tr>
+                    <td>
+                        <input type="checkbox" name="teste_{{ categorie.codCategorieTeste }}" value="{{ test.codTest }}">
+                    </td>
+                    <td>{{ test.codTest }}</td>
+                    <td>{{ test.DenumireTest }}</td>
+                    <td>
+                        <select name="rezultat_{{ test.codTest }}" class="form-select">
+                            <option value="1" class="btn-success">Trecut</option>
+                            <option value="2" class="btn-warning">Defecțiune Minora</option>
+                            <option value="3" class="btn-danger">Defecțiune Majora</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="detalii_{{ test.codTest }}">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Salvează</button>
+    </form>
+</div>
+{% endblock %}

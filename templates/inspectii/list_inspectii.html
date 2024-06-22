@@ -1,0 +1,36 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Lista Inspecții{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="my-4">Lista Inspecții</h2>
+    <table class="table table-bordered" id="lista">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Număr Înmatriculare</th>
+                <th>Data Inspecției</th>
+                <th>Valoare Odometru</th>
+                <th>Responsabil Întocmire</th>
+                <th>Acțiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inspectie in inspectii %}
+            <tr>
+                <td>{{ inspectie.codInspectie }}</td>
+                <td>{{ inspectie.NumarInmatriculare }}</td>
+                <td>{{ inspectie.DataInspectiei }}</td>
+                <td>{{ inspectie.ValoareOdometru }}</td>
+                <td>{{ inspectie.codResponsabilIntocmire }}</td>
+                <td>
+                    <a href="{{ url_for('inspectii.edit_inspectie', codInspectie=inspectie.codInspectie) }}" class="btn btn-warning btn-sm">Editează</a>
+                    <form action="{{ url_for('inspectii.delete_inspectie', codInspectie=inspectie.codInspectie) }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">Șterge</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

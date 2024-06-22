@@ -8,6 +8,7 @@ from blueprints.dotari import dotari_bp
 from blueprints.programari import programari_bp
 from blueprints.teste import teste_bp
 from blueprints.categorie_teste import categorieteste_bp
+from blueprints.inspectii import inspectii_bp
 
 from models.utilizatori import Utilizator
 
@@ -29,6 +30,7 @@ app.register_blueprint(dotari_bp, url_prefix='/dotari')
 app.register_blueprint(programari_bp, url_prefix='/programari')
 app.register_blueprint(teste_bp, url_prefix='/teste')
 app.register_blueprint(categorieteste_bp, url_prefix='/categorie-teste')
+app.register_blueprint(inspectii_bp, url_prefix='/inspectii')
 
 @app.route("/")
 def homePage():
