@@ -78,7 +78,7 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Programari</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ url_for('programari.create_programare') }}">Adauga Programare</a></li>
-                        <li><a class="dropdown-item" href="{{ url_for('programari.list_programari') }}">Lista Autoturisme</a></li>  
+                        <li><a class="dropdown-item" href="{{ url_for('programari.list_programari') }}">Lista Programari</a></li>  
                     </ul>
                 </li>
                 {% if current_user.is_authenticated and current_user.rol == 4 %}
