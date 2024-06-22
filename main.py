@@ -6,6 +6,8 @@ from blueprints.autoturism import autoturism_bp
 from blueprints.clienti import clienti_bp
 from blueprints.dotari import dotari_bp
 from blueprints.programari import programari_bp
+from blueprints.teste import teste_bp
+from blueprints.categorie_teste import categorieteste_bp
 
 from models.utilizatori import Utilizator
 
@@ -25,6 +27,8 @@ app.register_blueprint(autoturism_bp, url_prefix='/autoturism')
 app.register_blueprint(clienti_bp, url_prefix='/clienti')
 app.register_blueprint(dotari_bp, url_prefix='/dotari')
 app.register_blueprint(programari_bp, url_prefix='/programari')
+app.register_blueprint(teste_bp, url_prefix='/teste')
+app.register_blueprint(categorieteste_bp, url_prefix='/categorie-teste')
 
 @app.route("/")
 def homePage():

@@ -1,0 +1,39 @@
+{% extends "/components/base_user.html" %}
+{% block title %}
+    {% if categorie is defined %}Editează{% else %}Creează{% endif %} Categorie Teste
+{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="my-4">{% if categorie is defined %}Editează{% else %}Creează{% endif %} Categorie Teste</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="denumireCategorieTeste" class="form-label">Denumire Categorie Teste</label>
+            <input type="text" class="form-control" id="denumireCategorieTeste" name="denumireCategorieTeste" value="{{ categorie.DenumireCategorieTeste if categorie is defined }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="teste" class="form-label">Teste Disponibile</label>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Selecție</th>
+                        <th>ID</th>
+                        <th>Denumire Test</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for test in teste %}
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="teste_ids" value="{{ test.codTest }}" {% if selected_tests and test.codTest in selected_tests %}checked{% endif %}>
+                        </td>
+                        <td>{{ test.codTest }}</td>
+                        <td>{{ test.DenumireTest }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvează</button>
+    </form>
+</div>
+{% endblock %}

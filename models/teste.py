@@ -4,17 +4,14 @@ class Test(db.Model):
     __tablename__ = 'teste'
 
     codTest = db.Column(db.Integer, primary_key=True)
-    codCategorieTest = db.Column(db.Integer, db.ForeignKey('categorieteste.codCategorieTeste'))
     DenumireTest = db.Column(db.String(255), nullable=False)
 
-    def __init__(self, codCategorieTest, DenumireTest):
-        self.codCategorieTest = codCategorieTest
+    def __init__(self, DenumireTest):
         self.DenumireTest = DenumireTest
 
     @property
     def serialize(self):
         return {
             'codTest': self.codTeste,
-            'codCategorieTest': self.codCategorieTest,
-            'DenumireTest': self.DenumireTest,
+            'DenumireTest': self.DenumireTest
         }

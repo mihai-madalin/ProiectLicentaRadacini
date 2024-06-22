@@ -1,0 +1,31 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Lista Categorii Teste{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="my-4">Lista Categorii Teste</h2>
+    <a href="{{ url_for('categorie_teste.create_categorie_teste') }}" class="btn btn-primary mb-3">Adaugă Categorie Teste</a>
+    <table class="table table-bordered" id="lista">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Denumire Categorie Teste</th>
+                <th>Acțiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categorie in categorii %}
+            <tr>
+                <td>{{ categorie.codCategorieTeste }}</td>
+                <td>{{ categorie.DenumireCategorieTeste }}</td>
+                <td>
+                    <a href="{{ url_for('categorie_teste.edit_categorie_teste', codCategorieTeste=categorie.codCategorieTeste) }}" class="btn btn-warning btn-sm">Editează</a>
+                    <form action="{{ url_for('categorie_teste.delete_categorie_teste', codCategorieTeste=categorie.codCategorieTeste) }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">Șterge</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

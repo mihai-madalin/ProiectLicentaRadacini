@@ -1,0 +1,73 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Lista Teste{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="my-4">Lista Teste</h2>
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createTestModal">Adaugă Test</button>
+    <table class="table table-bordered" id="lista">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Denumire Test</th>
+                <th>Acțiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for test in teste %}
+            <tr>
+                <td>{{ test.codTest }}</td>
+                <td>{{ test.DenumireTest }}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editTestModal{{ test.codTest }}">Editează</button>
+                    <form action="{{ url_for('teste.delete_test', codTest=test.codTest) }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">Șterge</button>
+                    </form>
+                </td>
+            </tr>
+
+            <!-- Edit Test Modal -->
+            <div class="modal fade" id="editTestModal{{ test.codTest }}" tabindex="-1" aria-labelledby="editTestModalLabel{{ test.codTest }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editTestModalLabel{{ test.codTest }}">Editează Test</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ url_for('teste.edit_test', codTest=test.codTest) }}" method="POST">
+                                <div class="mb-3">
+                                    <label for="denumireTest" class="form-label">Denumire Test</label>
+                                    <input type="text" class="form-control" id="denumireTest" name="denumireTest" value="{{ test.DenumireTest }}" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Salvează</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Create Test Modal -->
+<div class="modal fade" id="createTestModal" tabindex="-1" aria-labelledby="createTestModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createTestModalLabel">Adaugă Test</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url_for('teste.create_test') }}" method="POST">
+                    <div class="mb-3">
+                        <label for="denumireTest" class="form-label">Denumire Test</label>
+                        <input type="text" class="form-control" id="denumireTest" name="denumireTest" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvează</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
