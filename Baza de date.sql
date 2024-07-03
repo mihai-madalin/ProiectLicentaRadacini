@@ -20,7 +20,7 @@ CREATE TABLE `Autototurisme` (
   `valoareOdometru` int(10) NOT NULL,
   `tipAutoturism` int(3) NOT NULL,
   `AnulFabricatiei` int(4) NOT NULL,
-  `serieCaroserie` varchar(17) NOT NULL,
+  `serieCaroserie` varchar(17) NOT NULL UNIQUE,  
   `numarInmatriculare` varchar(10) NOT NULL,
   `culoare` varchar(50) NOT NULL,
   `dataPrimeiImatirculari` date NOT NULL,
