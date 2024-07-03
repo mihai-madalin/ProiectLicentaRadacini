@@ -6,31 +6,33 @@
     <table class="table table-bordered" id="lista">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Număr Înmatriculare</th>
                 <th>Data Inspecției</th>
                 <th>Valoare Odometru</th>
                 <th>Responsabil Întocmire</th>
-                <th>Acțiuni</th>
             </tr>
         </thead>
         <tbody>
             {% for inspectie in inspectii %}
-            <tr>
-                <td>{{ inspectie.codInspectie }}</td>
+            <tr data-href="{{ url_for('inspectii.generate_report', inspectie_id=inspectie.codInspectie) }}">
                 <td>{{ inspectie.NumarInmatriculare }}</td>
                 <td>{{ inspectie.DataInspectiei }}</td>
                 <td>{{ inspectie.ValoareOdometru }}</td>
-                <td>{{ inspectie.codResponsabilIntocmire }}</td>
-                <td>
-                    <a href="{{ url_for('inspectii.edit_inspectie', codInspectie=inspectie.codInspectie) }}" class="btn btn-warning btn-sm">Editează</a>
-                    <form action="{{ url_for('inspectii.delete_inspectie', codInspectie=inspectie.codInspectie) }}" method="POST" class="d-inline">
-                        <button type="submit" class="btn btn-danger btn-sm">Șterge</button>
-                    </form>
-                </td>
+                <td>{{ inspectie.ResponsabilNume }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const rows = document.querySelectorAll("tr[data-href]");
+        rows.forEach(row => {
+            row.addEventListener("click", () => {
+                window.location.href = row.dataset.href;
+            });
+        });
+    });
+</script>
 {% endblock %}

@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Raport de Inspecție</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial, sans-serif, 'Noto Color Emoji';
         }
         .header {
             display: flex;
@@ -50,10 +52,12 @@
 <div class="header">
     <img src="{{ logo_url }}" alt="Logo">
     <div class="company-info">
-        <h1>Autoglobus</h1>
-        <p>Address: Your Company Address</p>
-        <p>Phone: +123456789</p>
-        <p>Email: info@yourcompany.com</p>
+        <h1>RADACINI MOTORS SRL</h1>
+        <p>C.U.I:RO 17083558</p>
+        <p>Nr. Reg. Com. : J40/21994/2004 </p>
+        <p>Addresa: Bucuresti, Bd Timisoara nr 18</p>
+        <p>Phone: +40 737-600-600</p>
+        <p>Email: inspectii@radacini.ro</p>
     </div>
 </div>
 
@@ -62,29 +66,30 @@
     <p><strong>Număr Înmatriculare:</strong> {{ inspection_data['NumarInmatriculare'] }}</p>
     <p><strong>Data Inspecției:</strong> {{ inspection_data['DataInspectiei'] }}</p>
     <p><strong>Valoare Odometru:</strong> {{ inspection_data['ValoareOdometru'] }}</p>
-    <p><strong>Responsabil Întocmire:</strong> {{ inspection_data['codResponsabilIntocmire'] }}</p>
+    <p><strong>Responsabil Întocmire:</strong> {{ inspection_data['ResponsabilNume'] }}</p>
 </div>
 
-<table class="tests-table">
-    <thead>
-        <tr>
-            <th>ID Test</th>
-            <th>Denumire Test</th>
-            <th>Rezultat</th>
-            <th>Detalii</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for test in tests %}
-        <tr>
-            <td>{{ test['codTest'] }}</td>
-            <td>{{ test['DenumireTest'] }}</td>
-            <td>{{ test['rezultatTest'] }}</td>
-            <td>{{ test['DetaliiTest'] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% for category, tests in tests_by_category.items() %}
+    <h3>{{ category }}</h3>
+    <table class="tests-table">
+        <thead>
+            <tr>
+                <th>Denumire Test</th>
+                <th>Rezultat</th>
+                <th>Detalii</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for test in tests %}
+                <tr>
+                    <td>{{ test['DenumireTest'] }}</td>
+                    <td>{{ test['RezultatTest'] }}</td>
+                    <td>{{ test['DetaliiTest'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endfor %}
 
 </body>
 </html>

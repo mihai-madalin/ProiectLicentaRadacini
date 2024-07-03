@@ -114,7 +114,6 @@ CREATE TABLE `Programari` (
   `codResponsabilIntocmire` int(8) NOT NULL
 );
 
--- TO DO
 CREATE TABLE `Inspectii` (
   `codInspectie` int(8) PRIMARY KEY AUTO_INCREMENT,
   `codProgramre` int(8) NOT NULL,
@@ -123,7 +122,7 @@ CREATE TABLE `Inspectii` (
   `ValoareOdometru` int(10) NOT NULL,
   `codResponsabilIntocmire` int(8) NOT NULL
 );
--- TO DO
+
 CREATE TABLE `InspectiiTeste` (
   `codInspectieTest` int(8) PRIMARY KEY AUTO_INCREMENT,
   `codInspectie` int(8) NOT NULL,

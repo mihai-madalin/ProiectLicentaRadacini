@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for, flash
 from . import programari_bp
 from db import db
 from models.programari import Programare
+from models.inspectii import Inspectie
 from models.autoturism import Autoturism
 from models.client_persoana_fizica import ClientPersoanaFizica
 from models.client_persoana_juridica import ClientPersoanaJuridica
@@ -78,6 +79,17 @@ def edit_programare(programare_id):
         programare.client = ClientPersoanaJuridica.query.get(programare.codClientPersoanaJuridica)
     
     programare.responsabil = Utilizator.query.get(programare.codResponsabilIntocmire)
+    
+    if (programare.tipProgramre == 1):
+        # Fetch  Vizionare
+        codOperatiune = None
+        print()
+    elif (programare.tipProgramre == 2 and programare.statusProgramre in [1,2,3]):
+        # Fetch Inspectie
+        codProgramare = db.session.query(Inspectie.codInspectie).filter_by(codProgramre=programare_id).first()        
+        codOperatiune = codProgramare[0] if codProgramare != None else -1
+    else:
+        codOperatiune = None
 
     if request.method == 'POST':
         if programare.statusProgramre not in [3, 4]:
@@ -95,9 +107,11 @@ def edit_programare(programare_id):
             db.session.commit()
             flash('Programare actualizată cu succes!', 'success')
             return redirect(url_for('programari.list_programari'))
-
+    
     return render_template(
         'programari/edit_programare.html',
         programare=programare,
-        autoturisme=autoturisme
+        autoturisme=autoturisme,
+        codOperatiune = codOperatiune,
+        userRole = current_user.rol
     )

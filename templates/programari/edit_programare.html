@@ -47,10 +47,15 @@
         {% if programare.statusProgramre not in [3, 4] %}
         <button type="submit" class="btn btn-primary">Salvează</button>
         {% endif %}
+        
         {% if programare.tipProgramre == 1 %}
         <a href="" class="btn btn-secondary">Mergi la ofertă</a>
         {% elif programare.tipProgramre == 2 %}
-        <a href="" class="btn btn-secondary">Mergi la inspecție</a>
+            {% if programare.statusProgramre in [1, 2] and userRole == 2 %}
+            <a href="{{url_for('inspectii.create_inspectie_phase1', codProgramre=programare.codProgramare)}}" class="btn btn-secondary" >Realizeaza Inspectia</a>
+            {% elif programare.statusProgramre == 3%}
+            <a href="{{url_for('inspectii.generate_report', inspectie_id=codOperatiune)}}" class="btn btn-secondary" >Vezi Raport Inspectie</a>
+            {% endif %}
         {% endif %}
     </form>
 </div>
