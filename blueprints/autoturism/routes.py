@@ -147,14 +147,38 @@ def view_autoturism(autoturism_id):
 #         return redirect(url_for("autoturism.list_autoturism"))
 #     return render_template("autoturism/edit_autoturism.html", autoturism=autoturism)
 
+
+
+                    #ADR
+#@autoturism_bp.route("/delete/<int:autoturism_id>", methods=["POST"])
+#@login_required
+#def delete_autoturism(autoturism_id):
+#    autoturism = Autoturism.query.get_or_404(autoturism_id)
+#    db.session.delete(autoturism)
+#    db.session.commit()
+#    flash("Autoturism deleted successfully.", "success")
+#    return redirect(url_for("autoturism.list_autoturism"))
+
+
+                #adr chat gpt
 @autoturism_bp.route("/delete/<int:autoturism_id>", methods=["POST"])
 @login_required
 def delete_autoturism(autoturism_id):
     autoturism = Autoturism.query.get_or_404(autoturism_id)
-    db.session.delete(autoturism)
-    db.session.commit()
-    flash("Autoturism deleted successfully.", "success")
+    try:
+        # Șterge dotările asociate
+        AutoturismDotari.query.filter_by(codAutoturism=autoturism_id).delete()
+        # Șterge fotografiile asociate
+        AutoturismFotografii.query.filter_by(codAutoturism=autoturism_id).delete()
+        # Șterge autoturismul
+        db.session.delete(autoturism)
+        db.session.commit()
+        flash("Autoturism deleted successfully.", "success")
+    except Exception as e:
+        db.session.rollback()
+        flash(f"An error occurred: {e}", "danger")
     return redirect(url_for("autoturism.list_autoturism"))
+
 
 @autoturism_bp.route("/upload_photos/<int:autoturism_id>", methods=["GET", "POST"])
 @login_required
