@@ -2,19 +2,19 @@
 {% block title %}Creează Inspecție (Faza 1){% endblock %}
 {% block content %}
 <div class="container mt-4">
-    <h2 class="my-4">Creează Inspecție (Faza 1)</h2>
+    <h2 class="my-4">Creează Inspecție (Faza 1 - Identificare)</h2>
     <form method="POST">
         <div class="mb-3">
-            <label for="NumarInmatriculare" class="form-label">Număr Înmatriculare</label>
-            <input type="text" class="form-control" id="NumarInmatriculare" name="NumarInmatriculare" required>
+            <label for="NumarInmatriculare" class="form-label" >Număr Înmatriculare </label>
+            <input type="text" class="form-control" id="NumarInmatriculare" name="NumarInmatriculare" value="{{autoturism.numarInmatriculare}}" required>
         </div>
         <div class="mb-3">
             <label for="DataInspectiei" class="form-label">Data Inspecției</label>
             <input type="datetime-local" class="form-control" id="DataInspectiei" name="DataInspectiei" required>
         </div>
         <div class="mb-3">
-            <label for="ValoareOdometru" class="form-label">Valoare Odometru</label>
-            <input type="number" class="form-control" id="ValoareOdometru" name="ValoareOdometru" required>
+            <label for="ValoareOdometru" class="form-label">Valoare Odometru  - Valoarea la ultima inspectie {{autoturism.valoareOdometru}} km</label>
+            <input type="number" class="form-control" id="ValoareOdometru" name="ValoareOdometru" min="{{autoturism.valoareOdometru}}" required>
         </div>
         <button type="submit" class="btn btn-primary">Următor</button>
     </form>

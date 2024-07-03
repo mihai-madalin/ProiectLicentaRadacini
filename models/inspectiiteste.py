@@ -5,7 +5,7 @@ class InspectieTest(db.Model):
 
     codInspectieTest = db.Column(db.Integer, primary_key=True)
     codInspectie = db.Column(db.Integer, db.ForeignKey('inspectii.codInspectie'), nullable=False)
-    codTest = db.Column(db.Integer, db.ForeignKey('teste.codTeste'), nullable=False)
+    codTest = db.Column(db.Integer, db.ForeignKey('teste.codTest'), nullable=False)
     rezultatTest = db.Column(db.Integer, nullable=False)
     DetaliiTest = db.Column(db.String(255))
 

@@ -1,0 +1,38 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Creează Inspecție (Faza 3){% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="my-4">Creează Inspecție (Faza 3)</h2>
+    <form method="POST">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID Test</th>
+                    <th>Denumire Test</th>
+                    <th>Rezultat</th>
+                    <th>Detalii</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for test in teste_details %}
+                <tr>
+                    <td>{{ test.codTest }}</td>
+                    <td>{{ test.DenumireTest }}</td>
+                    <td>
+                        <select name="rezultat_{{ test.codTest }}" class="form-select">
+                            <option value="1">Trecut</option>
+                            <option value="2">Defecțiune Minora</option>
+                            <option value="3">Defecțiune Majora</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="detalii_{{ test.codTest }}">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary">Salvează</button>
+    </form>
+</div>
+{% endblock %}

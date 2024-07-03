@@ -114,6 +114,7 @@ CREATE TABLE `Programari` (
   `codResponsabilIntocmire` int(8) NOT NULL
 );
 
+-- TO DO
 CREATE TABLE `Inspectii` (
   `codInspectie` int(8) PRIMARY KEY AUTO_INCREMENT,
   `codProgramre` int(8) NOT NULL,
@@ -122,7 +123,7 @@ CREATE TABLE `Inspectii` (
   `ValoareOdometru` int(10) NOT NULL,
   `codResponsabilIntocmire` int(8) NOT NULL
 );
-
+-- TO DO
 CREATE TABLE `InspectiiTeste` (
   `codInspectieTest` int(8) PRIMARY KEY AUTO_INCREMENT,
   `codInspectie` int(8) NOT NULL,
@@ -146,7 +147,7 @@ CREATE TABLE `TotalTeste` (
   `codCategorieTest` int(8) NOT NULL,
   `codTest` int(8) NOT NULL
 );
-
+-- TO DO
 CREATE TABLE `OferteVanzare` (
   `codOferta` int(8) PRIMARY KEY AUTO_INCREMENT,
   `tipOferta` int(1) NOT NULL,
@@ -156,6 +157,7 @@ CREATE TABLE `OferteVanzare` (
   `codInspectieTehnica` int(8) NOT NULL
 );
 
+-- TO DO
 CREATE TABLE `FacturaFiscala` (
   `NumarFactura` int(8) AUTO_INCREMENT,
   `SerieFactura` int(8),
@@ -163,6 +165,7 @@ CREATE TABLE `FacturaFiscala` (
   PRIMARY KEY (`NumarFactura`, `SerieFactura`)
 );
 
+-- TO DO
 CREATE TABLE `ComponenteFactura` (
   `codComponenteFactura` int(10) AUTO_INCREMENT,
   `NumarFactura` int(8) NOT NULL,
@@ -173,13 +176,13 @@ CREATE TABLE `ComponenteFactura` (
   `PretUnitar` float(5) NOT NULL,
   PRIMARY KEY (`codComponenteFactura`, `NumarFactura`, `SerieFactura`)
 );
-
+-- TO DO
 CREATE TABLE `CertificateGarantie` (
   `numarCertificatGarantie` int(8) PRIMARY KEY AUTO_INCREMENT,
   `codInternContract` int(8),
   `PerioadaGarantie` int(4)
 );
-
+-- TO DO
 CREATE TABLE `ContracteVanzareCumparare` (
   `codInternContract` int(8) PRIMARY KEY AUTO_INCREMENT,
   `vandutDeRadacini` bool,
