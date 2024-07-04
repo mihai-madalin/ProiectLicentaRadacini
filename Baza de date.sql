@@ -146,7 +146,6 @@ CREATE TABLE `TotalTeste` (
   `codCategorieTest` int(8) NOT NULL,
   `codTest` int(8) NOT NULL
 );
--- TO DO
 CREATE TABLE `OferteVanzare` (
   `codOferta` int(8) PRIMARY KEY AUTO_INCREMENT,
   `tipOferta` int(1) NOT NULL,

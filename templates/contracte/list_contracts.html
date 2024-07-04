@@ -1,0 +1,32 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Lista Contracte{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="my-4">Lista Contracte</h2>
+    <a href="{{ url_for('contracte.create_contract') }}" class="btn btn-primary mb-3">Creează Contract</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tip</th>
+                <th>Autoturism</th>
+                <th>Valoare</th>
+                <th>Acțiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contract in contracts %}
+            <tr>
+                <td>{{ contract.codInternContract }}</td>
+                <td>{{ 'Vanzare' if not contract.vandutDeRadacini else 'Achizitie' }}</td>
+                <td>{{ contract.autoturism.marca }} - {{ contract.autoturism.model }} - {{ contract.autoturism.numarInmatriculare }}</td>
+                <td>{{ contract.valoareaContractului }}</td>
+                <td>
+                    <a href="{{ url_for('contracte.generate_contract', codInternContract=contract.codInternContract) }}" class="btn btn-success btn-sm">Generează Contract</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

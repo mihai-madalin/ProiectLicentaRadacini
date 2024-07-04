@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Contract de Vânzare-Cumpărare</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .header, .section { margin-bottom: 20px; }
+        .header { border-bottom: 1px solid #000; padding-bottom: 10px; }
+        .header img { max-height: 80px; }
+        .header .company-info { text-align: right; }
+        .section h2 { margin-bottom: 10px; }
+        .section p { margin: 5px 0; }
+    </style>
+</head>
+<body>
+<!-- <div class="section">
+    <h2>CONTRACT DE ÎNSTRĂINARE- DOBÂNDIRE A UNUI MIJLOC DE TRANSPORT</h2>
+    <p>Denumirea organului fiscal de la domiciliul/sediul persoanei care înstrăinează:</p>
+    <p>.....................................................................</p>
+    <p>CIF/Cod SIRUTA: .......................................</p>
+    <p>Adresa: .........................................................</p>
+    <p>........................................................................</p>
+    <p>Tel.: ............................ Fax: ...........................</p>
+    <p>E-mail: ..........................................................</p>
+    <p>REMTII: Nr. .................. / ...........................</p>
+    <p>Rol nr. ..........................................................</p>
+    <p>Original  Copie</p>
+</div> -->
+<div class="section"><h2>CONTRACT DE ÎNSTRĂINARE- DOBÂNDIRE A UNUI MIJLOC DE TRANSPORT </h2></div>
+<div class="section">
+    <h4>1. PERSOANA CARE ÎNSTRĂINEAZĂ:</h4>
+    <p>1. PERSOANA CARE ÎNSTRĂINEAZĂ: Subsemnat(ul)/(a)/Subscrisa <strong>{{(contract.vanzatorPF.nume  + ' ' + contract.vanzatorPF.prenume) if contract.vanzatorPF else (contract.vanzatorPJ.Nume  )}}</strong> cu 
+        domiciliul/sediul în România, judetul <strong>{{ contract.vanzatorPF.judet if contract.vanzatorPF else contract.vanzatorPJ.Judet }}</strong>, satul/sectorul 
+        <strong>{{ contract.vanzatorPF.oras if contract.vanzatorPF else contract.vanzatorPJ.Oras }}</strong> str. <strong>{{ contract.vanzatorPF.strada if contract.vanzatorPF else contract.vanzatorPJ.Strada }}</strong> 
+        nr. <strong> {{ contract.vanzatorPF.numar if contract.vanzatorPF else contract.vanzatorPJ.Numar }} </strong>
+        , identificat prin CNP/CIF: <strong>{{ contract.vanzatorPF.CNP if contract.vanzatorPF else contract.vanzatorPJ.CUI }}</strong>, telefon/email </p>
+        <p>și</p>
+        <p>domiciliul fiscal în 
+            județul ........................................................, codul poștal ..........................., municipiul/orașul/comuna 
+            ..........................................................., satul/sectorul ......................................................, str. ............................................................., 
+            nr. ..........., bl. ............., sc. ........., et. ......., ap. ........,  reprezentată prin ..............................................................., identificat prin 
+            B.I./C.I./C.I.P./Pașaport seria ........ nr. ................., C.N.P./C.I.F. ................................................, tel./fax: .........................................., 
+            e-mail: ................................................................. </p>
+            <p> în calitate de <strong>VÂNZĂTOR</strong></p>
+
+
+</div>
+
+<div class="section">
+    <h4>2. PERSOANA CARE DOBÂNDEȘTE:</h4>
+    <p>{{ contract.cumparatorPF.nume if contract.cumparatorPF else contract.cumparatorPJ.Nume }}</p>
+    <p>Adresa: {{ contract.cumparatorPF.strada if contract.cumparatorPF else contract.cumparatorPJ.Strada }} nr. {{ contract.cumparatorPF.numar if contract.cumparatorPF else contract.cumparatorPJ.Numar }}</p>
+    <p>Localitate: {{ contract.cumparatorPF.oras if contract.cumparatorPF else contract.cumparatorPJ.Oras }}</p>
+    <p>Județ: {{ contract.cumparatorPF.judet if contract.cumparatorPF else contract.cumparatorPJ.Judet }}</p>
+    <p>CIF/CNP: {{ contract.cumparatorPF.CNP if contract.cumparatorPF else contract.cumparatorPJ.CUI }}</p>
+</div>
+
+<div class="section">
+    <h4>3. OBIECTUL CONTRACTULUI</h4>
+    <p>Mijlocul de transport: marca {{ contract.autoturism.marca }}, model {{ contract.autoturism.model }}, număr de identificare {{ contract.autoturism.serieCaroserie }}, serie motor {{ contract.autoturism.serieMotor }}</p>
+    <p>Capacitatea cilindrică: {{ contract.autoturism.capacitateCilindrica }} cmc</p>
+    <p>Număr de înmatriculare: {{ contract.autoturism.numarInmatriculare }}</p>
+    <p>An de fabricație: {{ contract.autoturism.AnulFabricatiei }}</p>
+    <p>Preț: {{ contract.valoareaContractului }} lei</p>
+</div>
+
+<div class="section">
+    <h4>4. PREȚUL</h4>
+    <p>În cifre: {{ contract.valoareaContractului }} lei</p>
+    <p>În litere: {{ valInNumere }} lei</p>
+</div>
+
+<div class="section">
+    <h4>5. DECLARAȚIILE PĂRȚILOR</h4>
+    <p>Persoana care înstrăinează, menționată la punctul (1), declară că mijlocul de transport este proprietatea sa, liber de orice sarcini.</p>
+    <p>Persoana care dobândește, menționată la punctul (2), declară că a primit de la vânzătorul menționat la punctul (1): mijlocul de transport, cheile, certificatul de înmatriculare și cartea de identitate a vehiculului, achitând persoanei care înstrăinează prețul menționat la punctul (4).</p>
+</div>
+
+<div class="section">
+    <h2>Data și locul încheierii actului: ................................................ / ..........................................................</h2>
+    <p>Semnătura persoanei care înstrăinează: ................................................</p>
+    <p>Semnătura persoanei care dobândește: ................................................</p>
+</div>
+
+</body>
+</html>

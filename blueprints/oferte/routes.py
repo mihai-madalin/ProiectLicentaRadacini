@@ -131,7 +131,7 @@ def generate_offer_report(codOferta):
         tip_transmisie=tip_transmisie,
         status=status,
         combustibil=combustibil,
-        logo_url=url_for('static', filename='images/logo.jpg', _external=True)  # Use absolute URL
+        logo_url=url_for('static', filename='images/logo.jpg', _external=True)  
     )
 
     pdf_file = pdfkit.from_string(rendered_html, False)

@@ -1,0 +1,80 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Creează Contract{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Creează Contract</h2>
+    <form method="POST">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="vandutDeRadacini" class="form-label">Vândut de Radacini</label>
+                <input type="checkbox" id="vandutDeRadacini" name="vandutDeRadacini" value="true">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="vanzatorPersoanaJuridica" class="form-label">Vânzător Persoană Juridică</label>
+                <input type="checkbox" id="vanzatorPersoanaJuridica" name="vanzatorPersoanaJuridica" value="true">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="cumparatorPersoanaJuridica" class="form-label">Cumpărător Persoană Juridică</label>
+                <input type="checkbox" id="cumparatorPersoanaJuridica" name="cumparatorPersoanaJuridica" value="true">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codAutoturism" class="form-label">Autoturism</label>
+                <select id="codAutoturism" name="codAutoturism" class="form-select">
+                    {% for autoturism in autoturisme %}
+                    <option value="{{ autoturism.codAutoturism }}">{{ autoturism.marca }} - {{ autoturism.model }} - {{ autoturism.numarInmatriculare }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="valoareaContractului" class="form-label">Valoarea Contractului</label>
+                <input type="number" id="valoareaContractului" name="valoareaContractului" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codOferta" class="form-label">Ofertă</label>
+                <select id="codOferta" name="codOferta" class="form-select">
+                    {% for oferta in oferte %}
+                    <option value="{{ oferta.codOferta }}">{{ oferta.codOferta }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codInternVanzatorPersoanaFizica" class="form-label">Vânzător Persoană Fizică</label>
+                <select id="codInternVanzatorPersoanaFizica" name="codInternVanzatorPersoanaFizica" class="form-select">
+                    <option value="" selected>N/A</option>
+                    {% for client in clienti_persoane_fizice %}
+                    <option value="{{ client.codClientPF }}">{{ client.nume }} {{ client.prenume }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codInternVanzatorPersoanaJuridica" class="form-label">Vânzător Persoană Juridică</label>
+                <select id="codInternVanzatorPersoanaJuridica" name="codInternVanzatorPersoanaJuridica" class="form-select">
+                    <option value="" selected>N/A</option>
+                    {% for client in clienti_persoane_juridice %}
+                    <option value="{{ client.codClientPJ }}">{{ client.Nume }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codInternCumparatorPersoanaFizica" class="form-label">Cumpărător Persoană Fizică</label>
+                <select id="codInternCumparatorPersoanaFizica" name="codInternCumparatorPersoanaFizica" class="form-select">
+                    <option value="" selected>N/A</option>
+                    {% for client in clienti_persoane_fizice %}
+                    <option value="{{ client.codClientPF }}">{{ client.nume }} {{ client.prenume }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codInternCumparatorPersoanaJuridica" class="form-label">Cumpărător Persoană Juridică</label>
+                <select id="codInternCumparatorPersoanaJuridica" name="codInternCumparatorPersoanaJuridica" class="form-select">
+                    <option value="" selected>N/A</option>
+                    {% for client in clienti_persoane_juridice %}
+                    <option value="{{ client.codClientPJ }}">{{ client.Nume }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvează</button>
+    </form>
+</div>
+{% endblock %}
