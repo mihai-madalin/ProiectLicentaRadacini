@@ -5,6 +5,7 @@ from models.autoturisme_fotografii import AutoturismFotografii
 from models.dotari import Dotare
 from models.programari import Programare
 from . import oferte_vanzare_bp
+from sqlalchemy.orm import joinedload
 from db import db
 from models.ofertevanzare import OfertaVanzare
 from models.autoturism import Autoturism
@@ -37,46 +38,49 @@ COMBUSTIBIL = {
 }
 
 
-@oferte_vanzare_bp.route('/', methods=['GET'])
+
+@oferte_vanzare_bp.route('/')
 @login_required
 def list_oferte():
-    oferte = OfertaVanzare.query.all()
+    oferte = OfertaVanzare.query.options(joinedload(OfertaVanzare.autoturism), joinedload(OfertaVanzare.inspectie)).all()
     return render_template('ofertevanzare/list_oferte.html', oferte=oferte)
 
 @oferte_vanzare_bp.route('/create', methods=['GET', 'POST'])
 @login_required
 def create_oferta():
     autoturisme = Autoturism.query.all()
-    inspectii = Inspectie.query.all()
-
+    inspectii = Inspectie.query.options(joinedload(Inspectie.programare)).all()
     if request.method == 'POST':
-        tipOferta = request.form.get('tipOferta')
-        codAutorism = request.form.get('codAutorism')
-        valoareOdometru = request.form.get('valoareOdometru')
-        pret = request.form.get('pret')
-        codInspectieTehnica = request.form.get('codInspectieTehnica')
-
-        new_oferta = OfertaVanzare(tipOferta, codAutorism, valoareOdometru, pret, codInspectieTehnica)
+        tip_oferta = request.form['tipOferta']
+        cod_autorism = request.form['codAutorism']
+        valoare_odometru = request.form['valoareOdometru']
+        pret = request.form['pret']
+        cod_inspectie_tehnica = request.form['codInspectieTehnica']
+        
+        new_oferta = OfertaVanzare(
+            tipOferta=tip_oferta,
+            codAutorism=cod_autorism,
+            valoareOdometru=valoare_odometru,
+            pret=pret,
+            codInspectieTehnica=cod_inspectie_tehnica
+        )
         db.session.add(new_oferta)
         db.session.commit()
-
         flash('Oferta a fost creată cu succes!', 'success')
         return redirect(url_for('oferte_vanzare.list_oferte'))
 
     return render_template('ofertevanzare/create_oferta.html', autoturisme=autoturisme, inspectii=inspectii)
 
-@oferte_vanzare_bp.route('/<int:codOferta>/edit', methods=['GET', 'POST'])
+@oferte_vanzare_bp.route('/edit/<int:codOferta>', methods=['GET', 'POST'])
 @login_required
 def edit_oferta(codOferta):
     oferta = OfertaVanzare.query.get_or_404(codOferta)
     autoturisme = Autoturism.query.all()
-    inspectii = Inspectie.query.all()
-
+    inspectii = Inspectie.query.options(joinedload(Inspectie.programare)).all()
     if request.method == 'POST':
-        oferta.tipOferta = request.form.get('tipOferta')
-        oferta.valoareOdometru = request.form.get('valoareOdometru')
-        oferta.pret = request.form.get('pret')
-
+        oferta.tipOferta = request.form['tipOferta']
+        oferta.valoareOdometru = request.form['valoareOdometru']
+        oferta.pret = request.form['pret']
         db.session.commit()
         flash('Oferta a fost actualizată cu succes!', 'success')
         return redirect(url_for('oferte_vanzare.list_oferte'))

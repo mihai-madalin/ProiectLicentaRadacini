@@ -13,6 +13,7 @@ class Programare(db.Model):
     codResponsabilIntocmire = db.Column(db.Integer, db.ForeignKey('utilizatori.codUtilizator'), nullable=False)
     
     responsabil = db.relationship('Utilizator', backref=db.backref('programari', lazy=True))
+    # inspectii = db.relationship('Inspectie', back_populates='programare')
     autoturism = db.relationship('Autoturism', backref=db.backref('programari', lazy=True))
 
     def __init__(self, tipProgramre, dataProgramare, codAutoturism, statusProgramre, codClientPersoanaFizica, codClientPersoanaJuridica, codResponsabilIntocmire):

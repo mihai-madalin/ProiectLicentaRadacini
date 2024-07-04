@@ -32,7 +32,7 @@
                 <label for="codInspectieTehnica" class="form-label">Inspectie Tehnica</label>
                 <select id="codInspectieTehnica" name="codInspectieTehnica" class="form-select" disabled>
                     {% for inspectie in inspectii %}
-                    <option value="{{ inspectie.codInspectie }}" {% if oferta.codInspectieTehnica == inspectie.codInspectie %}selected{% endif %}>#{{ inspectie.codInspectie }} - {{ inspectie.DataInspectiei }} - {{ inspectie.NumarInmatriculare }}</option>
+                    <option value="{{ inspectie.codInspectie }}" {% if oferta.codInspectieTehnica == inspectie.codInspectie %}selected{% endif %} data-autoturism="{{ inspectie.codAutoturism }}">#{{ inspectie.codInspectie }} - {{ inspectie.DataInspectiei }} - {{ inspectie.NumarInmatriculare }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -41,4 +41,19 @@
         <a href="{{url_for('oferte_vanzare.generate_offer_report', codOferta=oferta.codOferta)}}" class="btn btn-success">Generează Oferta</a>
     </form>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const codAutorismSelect = document.getElementById('codAutorism');
+        const codInspectieTehnicaSelect = document.getElementById('codInspectieTehnica');
+        
+        const selectedCodAutoturism = codAutorismSelect.value;
+        
+        // Filter inspections based on the selected car
+        for (let i = 0; i < codInspectieTehnicaSelect.options.length; i++) {
+            const option = codInspectieTehnicaSelect.options[i];
+            option.style.display = option.getAttribute('data-autoturism') === selectedCodAutoturism ? 'block' : 'none';
+        }
+    });
+</script>
 {% endblock %}

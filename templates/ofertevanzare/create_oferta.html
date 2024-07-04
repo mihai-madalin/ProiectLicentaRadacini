@@ -32,7 +32,7 @@
                 <label for="codInspectieTehnica" class="form-label">Inspectie Tehnica</label>
                 <select id="codInspectieTehnica" name="codInspectieTehnica" class="form-select">
                     {% for inspectie in inspectii %}
-                    <option value="{{ inspectie.codInspectie }}">#{{ inspectie.codInspectie }} - {{ inspectie.DataInspectiei }} - {{ inspectie.NumarInmatriculare }}</option>
+                    <option value="{{ inspectie.codInspectie }}" data-autoturism="{{ inspectie.programare.codAutoturism }}">#{{ inspectie.codInspectie }} - {{ inspectie.DataInspectiei }} - {{ inspectie.NumarInmatriculare }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -45,12 +45,22 @@
     document.addEventListener("DOMContentLoaded", function() {
         const codAutorismSelect = document.getElementById('codAutorism');
         const valoareOdometruInput = document.getElementById('valoareOdometru');
+        const codInspectieTehnicaSelect = document.getElementById('codInspectieTehnica');
 
         codAutorismSelect.addEventListener('change', function() {
             const selectedOption = codAutorismSelect.options[codAutorismSelect.selectedIndex];
             const odometerValue = selectedOption.getAttribute('data-odometer');
+            const selectedCodAutoturism = selectedOption.value;
+
             valoareOdometruInput.value = odometerValue;
             valoareOdometruInput.setAttribute('min', odometerValue);
+
+            // Filter inspections based on the selected car
+            for (let i = 0; i < codInspectieTehnicaSelect.options.length; i++) {
+                const option = codInspectieTehnicaSelect.options[i];
+                option.style.display = option.getAttribute('data-autoturism') === selectedCodAutoturism ? 'block' : 'none';
+            }
+            codInspectieTehnicaSelect.selectedIndex = -1; // Reset selection
         });
 
         codAutorismSelect.dispatchEvent(new Event('change'));
