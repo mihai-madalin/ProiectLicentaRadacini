@@ -159,7 +159,7 @@ def generate_report(inspectie_id):
     for test in inspectie_tests:
         test_details = Test.query.get(test.codTest)
         test_category = TotalTeste.query.filter_by(codTest=test.codTest).first().codCategorieTest
-        category_name = CategorieTeste.query.get(test_category).DenumireCategorieTeste
+        category_name = CategorieTeste.query.get(test_category.DenumireCategorieTeste)
 
         
         if test.rezultatTest == 1:
