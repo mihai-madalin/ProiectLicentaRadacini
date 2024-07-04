@@ -19,9 +19,6 @@
                 <td>{{ dotare.denumireDotare }}</td>
                 <td>
                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editDotareModal{{ dotare.codDotare }}">Editeaza</button>
-                    <form action="{{ url_for('dotari.delete_dotare', codDotare=dotare.codDotare) }}" method="POST" class="d-inline">
-                        <button type="submit" class="btn btn-danger btn-sm">Sterge</button>
-                    </form>
                 </td>
             </tr>
 

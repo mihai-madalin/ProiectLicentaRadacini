@@ -7,18 +7,18 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="tipProgramare" class="form-label">Tip Programare</label>
-                <select id="tipProgramare" name="tipProgramare" class="form-select">
+                <select id="tipProgramare" name="tipProgramare" class="form-select" required>
                     <option value="1">Programare Vizionare Mașină</option>
                     <option value="2">Programare Inspecție Mașină</option>
                 </select>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="dataProgramare" class="form-label">Data Programare</label>
-                <input type="datetime-local" id="dataProgramare" name="dataProgramare" class="form-control">
+                <input type="datetime-local" id="dataProgramare" name="dataProgramare" class="form-control" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="codAutoturism" class="form-label">Autoturism</label>
-                <select id="codAutoturism" name="codAutoturism" class="form-select">
+                <select id="codAutoturism" name="codAutoturism" class="form-select" required>
                     {% for autoturism in autoturisme %}
                     <option value="{{ autoturism.codAutoturism }}">{{ autoturism.marca }} {{ autoturism.model }} |  {{autoturism.numarInmatriculare}} </option>
                     {% endfor %}
@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="statusProgramre" class="form-label">Status Programare</label>
-                <select name="statusProgramre" id="statusProgramre" class="form-select">
+                <select name="statusProgramre" id="statusProgramre" class="form-select" required>
                     <option value="1">Creată</option>
                     <option value="2">Confirmata</option>
                     <option value="3">Realizata</option>

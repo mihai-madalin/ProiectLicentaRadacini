@@ -30,7 +30,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="codInspectieTehnica" class="form-label">Inspectie Tehnica</label>
-                <select id="codInspectieTehnica" name="codInspectieTehnica" class="form-select">
+                <select id="codInspectieTehnica" name="codInspectieTehnica" class="form-select" required>
                     {% for inspectie in inspectii %}
                     <option value="{{ inspectie.codInspectie }}" data-autoturism="{{ inspectie.programare.codAutoturism }}">#{{ inspectie.codInspectie }} - {{ inspectie.DataInspectiei }} - {{ inspectie.NumarInmatriculare }}</option>
                     {% endfor %}
