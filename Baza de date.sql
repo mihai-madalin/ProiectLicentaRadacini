@@ -10,9 +10,6 @@ CREATE TABLE `Utilizatori` (
   `reseteazaParola` bool NOT NULL
 );
 
-
-
-
 CREATE TABLE `Autototurisme` (
   `codAutoturism` int(8) PRIMARY KEY AUTO_INCREMENT,
   `marca` varchar(50) NOT NULL,
@@ -52,10 +49,6 @@ CREATE TABLE `AutoturismeFotografii` (
   `fotografiePrincipala` bool NOT NULL
 );
 
-CREATE TABLE `Dotari` (
-  `codDotare` int(8) PRIMARY KEY AUTO_INCREMENT,
-  `denumireDotare` varchar(300) NOT NULL
-);
 
 CREATE TABLE `ClientiPersoaneFizice` (
   `codClientPF` int(8) PRIMARY KEY AUTO_INCREMENT,
@@ -72,7 +65,6 @@ CREATE TABLE `ClientiPersoaneFizice` (
   `etaj` varchar(3),
   `appartament` varchar(4)
 );
-
 CREATE TABLE `ClientiPersoaneJuridice` (
   `codClientPJ` int(8) PRIMARY KEY AUTO_INCREMENT,
   `Nume` varchar(255) NOT NULL,
@@ -155,7 +147,11 @@ CREATE TABLE `OferteVanzare` (
   `codInspectieTehnica` int(8) NOT NULL
 );
 
--- TO DO
+CREATE TABLE `Dotari` (
+  `codDotare` int(8) PRIMARY KEY AUTO_INCREMENT,
+  `denumireDotare` varchar(300) NOT NULL
+);
+
 CREATE TABLE `FacturaFiscala` (
   `NumarFactura` int(8) AUTO_INCREMENT,
   `SerieFactura` int(8),
@@ -163,7 +159,7 @@ CREATE TABLE `FacturaFiscala` (
   PRIMARY KEY (`NumarFactura`, `SerieFactura`)
 );
 
--- TO DO
+
 CREATE TABLE `ComponenteFactura` (
   `codComponenteFactura` int(10) AUTO_INCREMENT,
   `NumarFactura` int(8) NOT NULL,
@@ -174,13 +170,13 @@ CREATE TABLE `ComponenteFactura` (
   `PretUnitar` float(5) NOT NULL,
   PRIMARY KEY (`codComponenteFactura`, `NumarFactura`, `SerieFactura`)
 );
--- TO DO
+
 CREATE TABLE `CertificateGarantie` (
   `numarCertificatGarantie` int(8) PRIMARY KEY AUTO_INCREMENT,
   `codInternContract` int(8),
   `PerioadaGarantie` int(4)
 );
--- TO DO
+
 CREATE TABLE `ContracteVanzareCumparare` (
   `codInternContract` int(8) PRIMARY KEY AUTO_INCREMENT,
   `vandutDeRadacini` bool,

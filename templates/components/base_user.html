@@ -182,11 +182,11 @@
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/datatables.min.js') }}"></script>
     <script>
+        // In template-ul folosit in toate paginile
+        // adauga un DataTable pe toate entitatiile 
+        // care au id-ul egal cu listă
         $(document).ready(function() {
             let table = new DataTable('#lista', {
-                language: {
-                    // url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/ro.json'
-                },
                 dom: 'Bfrtip',
                 buttons: [
                     {

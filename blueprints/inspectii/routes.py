@@ -147,22 +147,21 @@ def generate_report(inspectie_id):
     inspectie = Inspectie.query.get_or_404(inspectie_id)
     inspectie_tests = InspectieTest.query.filter_by(codInspectie=inspectie_id).all()
 
-    # Fetch the responsible person's first and last name
+    # Preia Responsabilii 
     responsabil = Utilizator.query.get(inspectie.codResponsabilIntocmire)
     responsabil_name = f"{responsabil.nume} {responsabil.prenume}"
 
-    # Prepare data for the template
     inspection_data = inspectie.serialize
     inspection_data['ResponsabilNume'] = responsabil_name
 
-    # Group tests by categories
+    # Grupeaza testele pe categorii
     tests_by_category = {}
     for test in inspectie_tests:
         test_details = Test.query.get(test.codTest)
         test_category = TotalTeste.query.filter_by(codTest=test.codTest).first().codCategorieTest
         category_name = CategorieTeste.query.get(test_category).DenumireCategorieTeste
 
-        # Replace test result numbers with descriptions
+        
         if test.rezultatTest == 1:
             result_description = 'Trecut'
         elif test.rezultatTest == 2:
@@ -170,35 +169,30 @@ def generate_report(inspectie_id):
         elif test.rezultatTest == 3:
             result_description = 'Defectiune Majora'
         else:
-            result_description = 'N/A'
-
+            result_description = 'Defectiune neidentificata'
         test_data = {
             'DenumireTest': test_details.DenumireTest,
             'RezultatTest': result_description,
             'DetaliiTest': test.DetaliiTest
         }
-
         if category_name not in tests_by_category:
             tests_by_category[category_name] = []
         if test_data not in tests_by_category[category_name]:
             tests_by_category[category_name].append(test_data)
+            
+    rendered_html = render_template('inspectii/raport.html',
+                                    inspection_data=inspection_data,
+                                    tests_by_category=tests_by_category,
+                                    logo_url=url_for('static', filename='images/logo.jpg', _external=True))
 
-    # Render the template to HTML
-    logo_url = url_for('static', filename='images/logo.jpg', _external=True)
-    rendered_html = render_template('inspectii/raport.html', inspection_data=inspection_data, tests_by_category=tests_by_category, logo_url=logo_url)
-
-    # Ensure the directory exists
     reports_dir = 'C:\\Rapoarte'
     if not os.path.exists(reports_dir):
         os.makedirs(reports_dir)
 
-    # Convert HTML to PDF
+    # Convertește HTML la PDF
     pdf_file = pdfkit.from_string(rendered_html, False, configuration=config)
 
-    # Save the PDF file
     pdf_path = os.path.join(reports_dir, f'report_{inspectie_id}.pdf')
     with open(pdf_path, 'wb') as f:
         f.write(pdf_file)
-
-    # Serve the PDF to the user
     return send_file(pdf_path, as_attachment=True)

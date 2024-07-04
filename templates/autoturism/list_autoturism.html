@@ -10,6 +10,11 @@
                 <th>Marca</th>
                 <th>Model</th>
                 <th>Valoare Odometru</th>
+                <th>Numar Inmatriculare</th>
+                <th>Serie Caroserie</th>
+                <th>Tip Carburant</th>
+                <th>Tip Transmisie</th>
+                <th>Status Intern</th>
                 <th>Actiuni</th>
             </tr>
         </thead>
@@ -20,12 +25,50 @@
                 <td>{{ autoturism.marca }}</td>
                 <td>{{ autoturism.model }}</td>
                 <td>{{ autoturism.valoareOdometru }}</td>
+                <td>{{ autoturism.numarInmatriculare }}</td>
+                <td>{{ autoturism.serieCaroserie }}</td>
+                <td>
+                    {% if autoturism.combustibil == 1 %}
+                    Benzină
+                    {% elif autoturism.combustibil == 2 %}
+                    Diesel
+                    {% elif autoturism.combustibil == 3 %}
+                    Electrică
+                    {% elif autoturism.combustibil == 4 %}
+                    Benzină + GPL
+                    {% elif autoturism.combustibil == 5 %}
+                    Diesel + GNC
+                    {% elif autoturism.combustibil == 6 %}
+                    Hibrid + Benzină
+                    {% elif autoturism.combustibil == 7 %}
+                    Hibrid + Diesel
+                    {% elif autoturism.combustibil == 9 %}
+                    Hidrogen
+                    {% endif %}
+                </td>
+                <td>
+                    {% if autoturism.tipTransmisie == 1 %}
+                    Manuală
+                    {% elif autoturism.tipTransmisie == 2 %}
+                    Automată
+                    {% endif %}
+                </td>
+                <td>
+                    {% if autoturism.status == 0 %}
+                    <button class="btn btn-secondary">Neverificată</button>
+                    {% elif autoturism.status == 1 %}
+                    <button class="btn btn-primary">Verificata</button>
+                    {% elif autoturism.status == 2 %}
+                    <button class="btn btn-info">In Vanzare</button>
+                    {% elif autoturism.status == 3 %}
+                    <button class="btn btn-success">Vanduta</button>
+                    {% elif autoturism.status == 4 %}
+                    <button class="btn btn-danger">Retrasă</button>
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ url_for('autoturism.view_autoturism', autoturism_id=autoturism.codAutoturism) }}" class="btn btn-info">View</a>
                     <a href="{{ url_for('autoturism.edit_autoturism', autoturism_id=autoturism.codAutoturism) }}" class="btn btn-primary">Edit</a>
-                    <form action="{{ url_for('autoturism.delete_autoturism', autoturism_id=autoturism.codAutoturism) }}" method="POST" style="display:inline;">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
                 </td>
             </tr>
             {% endfor %}

@@ -109,12 +109,12 @@ def generate_offer_report(codOferta):
     fotografii = AutoturismFotografii.query.filter_by(codAutoturism=oferta.codAutorism).all()
     oferte_anterioare = OfertaVanzare.query.filter_by(codAutorism=oferta.codAutorism).all()
 
-    # Display values
+    
     tip_transmisie = TIP_TRANSMISIE.get(autoturism.tipTransmisie, 'N/A')
     status = STATUS.get(autoturism.status, 'N/A')
     combustibil = COMBUSTIBIL.get(autoturism.combustibil, 'N/A')
 
-    # Apply rules for electric cars
+    # Reguli de afisare in functie d emasina
     if autoturism.combustibil == 3:
         autoturism.capacitateRezervorTermic = None
     elif autoturism.combustibil in [1, 2, 4, 5, 9]:

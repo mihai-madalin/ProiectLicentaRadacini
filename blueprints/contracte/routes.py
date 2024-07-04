@@ -97,24 +97,21 @@ def delete_contract(codInternContract):
 @login_required
 def generate_contract(codInternContract):
     contract = ContractVanzareCumparare.query.get_or_404(codInternContract)
-    # Fetch all necessary data to populate the contract
+    rendered_html = render_template(
+        'contracte/contract.html',
+        contract=contract,
+        logo_url=url_for('static', filename='images/logo.jpg', _external=True) ,
+        valInNumere=num2words(contract.valoareaContractului, lang='ro')
+        )
 
-    # Render the contract template to HTML
-    rendered_html = render_template('contracte/contract.html', contract=contract, logo_url=url_for('static', filename='images/logo.jpg', _external=True) , valInNumere=num2words(contract.valoareaContractului, lang='ro'))
-
-
-    # Check if the directory exists, create it if it doesn't
     directory = 'C:\\Contracte'
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    # Convert HTML to PDF
     pdf_file = pdfkit.from_string(rendered_html, False)
 
-    # Save the PDF file
     pdf_path = os.path.join(directory, f'contract_{contract.codInternContract}.pdf')
     with open(pdf_path, 'wb') as f:
         f.write(pdf_file)
 
-    # Serve the PDF to the user
     return send_file(pdf_path, as_attachment=True)
