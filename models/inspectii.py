@@ -10,6 +10,9 @@ class Inspectie(db.Model):
     ValoareOdometru = db.Column(db.Integer, nullable=False)
     codResponsabilIntocmire = db.Column(db.Integer, db.ForeignKey('utilizatori.codUtilizator'), nullable=False)
 
+    responsabil = db.relationship('Utilizator', backref=db.backref('inspectii', lazy=True))
+    programare = db.relationship('Programare', backref=db.backref('inspectii', lazy=True))
+
     def __init__(self, codProgramre, NumarInmatriculare, DataInspectiei, ValoareOdometru, codResponsabilIntocmire):
         self.codProgramre = codProgramre
         self.NumarInmatriculare = NumarInmatriculare
@@ -26,4 +29,5 @@ class Inspectie(db.Model):
             'DataInspectiei': self.DataInspectiei,
             'ValoareOdometru': self.ValoareOdometru,
             'codResponsabilIntocmire': self.codResponsabilIntocmire,
+            'responsabil': self.responsabil.serialize
         }

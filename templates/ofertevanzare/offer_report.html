@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'Oferta de vanzare' if oferta.tipOferta == 1 else 'Oferta de achizitie' }}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
+        
+        body {
+            font-family: Arial, sans-serif, 'Noto Color Emoji';
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .header img {
+            max-height: 80px;
+        }
+        .header .company-info {
+            text-align: right;
+        }
+        .details, .inspections, .dotari, .fotografii, .oferte-anterioare {
+            margin-bottom: 20px;
+        }
+        .details h2, .inspections h2, .dotari h2, .fotografii h2, .oferte-anterioare h2 {
+            margin-bottom: 10px;
+        }
+        .details p, .inspections p, .dotari p, .fotografii p, .oferte-anterioare p {
+            margin: 5px 0;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .table th, .table td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: left;
+        }
+        .table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <img src="{{ logo_url }}" alt="Logo">
+    <div class="company-info">
+        <h1>RADACINI MOTORS SRL</h1>
+        <p>C.U.I:RO 17083558</p>
+        <p>Nr. Reg. Com. : J40/21994/2004 </p>
+        <p>Addresa: Bucuresti, Bd Timisoara nr 18</p>
+        <p>Phone: +40 737-600-600</p>
+        <p>Email: inspectii@radacini.ro</p>
+    </div>
+</div>
+
+<div class="details">
+    <h2>{{ 'OFERTĂ DE VÂNZARE' if oferta.tipOferta == 1 else 'OFERTĂ DE ACHIZIȚIE' }}</h2>
+    <p><strong>Marca:</strong> {{ autoturism.marca }}</p>
+    <p><strong>Model:</strong> {{ autoturism.model }}</p>
+    <p><strong>Anul Fabricatiei:</strong> {{ autoturism.AnulFabricatiei }}</p>
+    <p><strong>Număr Înmatriculare:</strong> {{ autoturism.numarInmatriculare }}</p>
+    <p><strong>Serie Caroserie:</strong> {{ autoturism.serieCaroserie }}</p>
+    <p><strong>Culoare:</strong> {{ autoturism.culoare }}</p>
+    <p><strong>Data Primei Îmatriculari:</strong> {{ autoturism.dataPrimeiImatirculari }}</p>
+    <p><strong>Capacitate Cilindrică:</strong> {{ autoturism.capacitateCilindrica }}</p>
+    <p><strong>Combustibil:</strong> {{ combustibil }}</p>
+    <p><strong>Număr Proprietari Anteriori:</strong> {{ autoturism.numarPropietariAnteriori }}</p>
+    
+    {% if combustibil != 'Electric' %}
+    <p><strong>Capacitate Rezervor Termic:</strong> {{ autoturism.capacitateRezervorTermic }}</p>
+    {% endif %}
+    
+    {% if combustibil == 'Electric' %}
+    <p><strong>Capacitate Autonomie Baterie:</strong> {{ autoturism.capacitateAutonomieBaterie }}</p>
+    {% endif %}
+    
+    <p><strong>Putere Motor:</strong> {{ autoturism.putereMotor }}</p>
+    <p><strong>Tip Transmisie:</strong> {{ tip_transmisie }}</p>
+    <p><strong>Status:</strong> {{ status }}</p>
+</div>
+
+<div class="dotari">
+    <h2>Dotări</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Dotare</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dotare in dotari %}
+            <tr>
+                <td>{{ dotare }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+<div class="inspections">
+    <h2>Inspecții Anterioare</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Număr Înmatriculare</th>
+                <th>Valoare Odometru</th>
+                <th>Responsabil Întocmire</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inspectie in inspectii %}
+            <tr>
+                <td>{{ inspectie.codInspectie }}</td>
+                <td>{{ inspectie.DataInspectiei }}</td>
+                <td>{{ inspectie.NumarInmatriculare }}</td>
+                <td>{{ inspectie.ValoareOdometru }}</td>
+                <td>{{ inspectie.responsabil.nume }} {{ inspectie.responsabil.prenume }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="oferte-anterioare">
+    <h2>Oferte Anterioare</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tip Ofertă</th>
+                <th>Valoare Odometru</th>
+                <th>Pret</th>
+                <th>Inspectie Tehnica</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for oferta_anterioara in oferte_anterioare %}
+            <tr>
+                <td>{{ oferta_anterioara.codOferta }}</td>
+                <td>{{ 'Oferta de vanzare' if oferta_anterioara.tipOferta == 1 else 'Oferta de achizitie' }}</td>
+                <td>{{ oferta_anterioara.valoareOdometru }}</td>
+                <td>{{ oferta_anterioara.pret }}</td>
+                <td>#{{ oferta_anterioara.codInspectieTehnica }} - {{ oferta_anterioara.inspectie.DataInspectiei }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="fotografii">
+    <h2>Fotografii</h2>
+    {% for fotografie in fotografii %}
+        <img src="{{ url_for('static', filename=fotografie.caleDiscFotografie, _external=True) }}" alt="Fotografie" style="max-width: 100%; height: auto;">
+    {% endfor %}
+</div>
+
+</body>
+</html>

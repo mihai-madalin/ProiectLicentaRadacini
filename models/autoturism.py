@@ -23,6 +23,11 @@ class Autoturism(db.Model):
     status = db.Column(db.Integer, nullable=False)
     
     
+    # tipAutoturism = db.relationship('TipAutoturisme', backref=db.backref('tipautoturisme', lazy=True))
+    # inspectie = db.relationship('Inspectie', backref=db.backref('ofertevanzare', lazy=True))
+
+    
+    
     def __init__(self, marca, model, valoareOdometru, tipAutoturism, AnulFabricatiei, serieCaroserie, numarInmatriculare, culoare, dataPrimeiImatirculari, capacitateCilindrica, combustibil, numarPropietariAnteriori, capacitateRezervorTermic, capacitateAutonomieBaterie, putereMotor, tipTransmisie, status):
         self.marca = marca
         self.model = model

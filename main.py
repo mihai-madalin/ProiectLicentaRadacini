@@ -9,6 +9,7 @@ from blueprints.programari import programari_bp
 from blueprints.teste import teste_bp
 from blueprints.categorie_teste import categorieteste_bp
 from blueprints.inspectii import inspectii_bp
+from blueprints.oferte import oferte_vanzare_bp
 
 from models.utilizatori import Utilizator
 
@@ -31,6 +32,7 @@ app.register_blueprint(programari_bp, url_prefix='/programari')
 app.register_blueprint(teste_bp, url_prefix='/teste')
 app.register_blueprint(categorieteste_bp, url_prefix='/categorie-teste')
 app.register_blueprint(inspectii_bp, url_prefix='/inspectii')
+app.register_blueprint(oferte_vanzare_bp, url_prefix='/oferte')
 
 @app.route("/")
 def homePage():

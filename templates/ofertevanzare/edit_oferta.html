@@ -1,0 +1,44 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Editează Ofertă{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Editează Ofertă</h2>
+    <form method="POST">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="tipOferta" class="form-label">Tip Ofertă</label>
+                <select id="tipOferta" name="tipOferta" class="form-select">
+                    <option value="1" {% if oferta.tipOferta == 1 %}selected{% endif %}>Oferta de vanzare</option>
+                    <option value="2" {% if oferta.tipOferta == 2 %}selected{% endif %}>Oferta de cumparare</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codAutorism" class="form-label">Autoturism</label>
+                <select id="codAutorism" name="codAutorism" class="form-select" disabled>
+                    {% for autoturism in autoturisme %}
+                    <option value="{{ autoturism.codAutoturism }}" {% if oferta.codAutorism == autoturism.codAutoturism %}selected{% endif %} data-odometer="{{ autoturism.valoareOdometru }}">{{ autoturism.marca }} - {{ autoturism.model }} - {{ autoturism.numarInmatriculare }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="valoareOdometru" class="form-label">Valoare Odometru</label>
+                <input type="number" id="valoareOdometru" name="valoareOdometru" class="form-control" value="{{ oferta.valoareOdometru }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="pret" class="form-label">Pret</label>
+                <input type="number" id="pret" name="pret" step="0.01" class="form-control" value="{{ oferta.pret }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codInspectieTehnica" class="form-label">Inspectie Tehnica</label>
+                <select id="codInspectieTehnica" name="codInspectieTehnica" class="form-select" disabled>
+                    {% for inspectie in inspectii %}
+                    <option value="{{ inspectie.codInspectie }}" {% if oferta.codInspectieTehnica == inspectie.codInspectie %}selected{% endif %}>#{{ inspectie.codInspectie }} - {{ inspectie.DataInspectiei }} - {{ inspectie.NumarInmatriculare }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvează</button>
+        <a href="{{url_for('oferte_vanzare.generate_offer_report', codOferta=oferta.codOferta)}}" class="btn btn-success">Generează Oferta</a>
+    </form>
+</div>
+{% endblock %}

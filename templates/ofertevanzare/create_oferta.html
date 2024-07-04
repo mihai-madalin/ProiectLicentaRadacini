@@ -1,0 +1,59 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Creează Ofertă{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Creează Ofertă</h2>
+    <form method="POST">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="tipOferta" class="form-label">Tip Ofertă</label>
+                <select id="tipOferta" name="tipOferta" class="form-select">
+                    <option value="1">Oferta de vanzare</option>
+                    <option value="2">Oferta de cumparare</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codAutorism" class="form-label">Autoturism</label>
+                <select id="codAutorism" name="codAutorism" class="form-select">
+                    {% for autoturism in autoturisme %}
+                    <option value="{{ autoturism.codAutoturism }}" data-odometer="{{ autoturism.valoareOdometru }}">{{ autoturism.marca }} - {{ autoturism.model }} - {{ autoturism.numarInmatriculare }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="valoareOdometru" class="form-label">Valoare Odometru</label>
+                <input type="number" id="valoareOdometru" name="valoareOdometru" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="pret" class="form-label">Pret</label>
+                <input type="number" id="pret" name="pret" step="0.01" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codInspectieTehnica" class="form-label">Inspectie Tehnica</label>
+                <select id="codInspectieTehnica" name="codInspectieTehnica" class="form-select">
+                    {% for inspectie in inspectii %}
+                    <option value="{{ inspectie.codInspectie }}">#{{ inspectie.codInspectie }} - {{ inspectie.DataInspectiei }} - {{ inspectie.NumarInmatriculare }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvează</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const codAutorismSelect = document.getElementById('codAutorism');
+        const valoareOdometruInput = document.getElementById('valoareOdometru');
+
+        codAutorismSelect.addEventListener('change', function() {
+            const selectedOption = codAutorismSelect.options[codAutorismSelect.selectedIndex];
+            const odometerValue = selectedOption.getAttribute('data-odometer');
+            valoareOdometruInput.value = odometerValue;
+            valoareOdometruInput.setAttribute('min', odometerValue);
+        });
+
+        codAutorismSelect.dispatchEvent(new Event('change'));
+    });
+</script>
+{% endblock %}

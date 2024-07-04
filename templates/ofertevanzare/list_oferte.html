@@ -1,0 +1,37 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Lista Oferte Vanzare{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="my-4">Lista Oferte Vanzare</h2>
+    <a href="{{ url_for('oferte_vanzare.create_oferta') }}" class="btn btn-primary mb-3">Creează Ofertă</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tip Ofertă</th>
+                <th>Autoturism</th>
+                <th>Valoare Odometru</th>
+                <th>Pret</th>
+                <th>Acțiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for oferta in oferte %}
+            <tr>
+                <td>{{ oferta.codOferta }}</td>
+                <td>{{ 'Oferta de vanzare' if oferta.tipOferta == 1 else 'Oferta de cumparare' }}</td>
+                <td>{{ oferta.autoturism.marca }} - {{ oferta.autoturism.model }} - {{ oferta.autoturism.numarInmatriculare }}</td>
+                <td>{{ oferta.valoareOdometru }}</td>
+                <td>{{ oferta.pret }}</td>
+                <td>
+                    <a href="{{ url_for('oferte_vanzare.edit_oferta', codOferta=oferta.codOferta) }}" class="btn btn-warning btn-sm">Editează</a>
+                    <form action="{{ url_for('oferte_vanzare.delete_oferta', codOferta=oferta.codOferta) }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">Șterge</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

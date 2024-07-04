@@ -9,6 +9,9 @@ class OfertaVanzare(db.Model):
     valoareOdometru = db.Column(db.Integer, nullable=False)
     pret = db.Column(db.Float, nullable=False)
     codInspectieTehnica = db.Column(db.Integer, db.ForeignKey('inspectii.codInspectie'), nullable=False)
+    
+    autoturism = db.relationship('Autoturism', backref=db.backref('ofertevanzare', lazy=True))
+    inspectie = db.relationship('Inspectie', backref=db.backref('ofertevanzare', lazy=True))
 
     def __init__(self, tipOferta, codAutorism, valoareOdometru, pret, codInspectieTehnica):
         self.tipOferta = tipOferta
