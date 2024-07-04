@@ -62,4 +62,4 @@ def delete_categorie_teste(codCategorieTeste):
     db.session.delete(categorie)
     db.session.commit()
     flash('Categorie Teste ștearsă cu succes!', 'success')
-    return redirect(url_for('teste.list_categorii_teste'))
+    return redirect(url_for('categorie_teste.list_categorii_teste'))
