@@ -156,6 +156,7 @@ CREATE TABLE `FacturaFiscala` (
   `NumarFactura` int(8) AUTO_INCREMENT,
   `SerieFactura` int(8),
   `ResponsabilIntocmire` int(8),
+  'codCumparatorPersoanaJuridica' int(8),
   PRIMARY KEY (`NumarFactura`, `SerieFactura`)
 );
 

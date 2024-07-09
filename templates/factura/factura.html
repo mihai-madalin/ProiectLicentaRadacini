@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .invoice {
+            width: 800px;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .invoice table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .invoice table, .invoice th, .invoice td {
+            border: 1px solid #000;
+        }
+        .invoice th, .invoice td {
+            padding: 8px;
+            text-align: left;
+        }
+        .header, .footer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .header div, .footer div {
+            width: 48%;
+        }
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice">
+        <div class="header">
+            <div>
+                <p>Furnizor: <strong>{{(contract.vanzatorPF.nume  + ' ' + contract.vanzatorPF.prenume) if contract.vanzatorPF else (contract.vanzatorPJ.Nume  )}}</strong></p>
+                <p>Nr.ord.reg.com/an: .....................................................</p>
+                <p>C.I.F:<strong>{{ contract.vanzatorPF.CNP if contract.vanzatorPF else contract.vanzatorPJ.CUI }}</strong></p>
+                <p>Sediul:<strong>{{ contract.vanzatorPF.oras if contract.vanzatorPF else contract.vanzatorPJ.Oras }}</strong></p>
+                <p>Județul:<strong>{{ contract.vanzatorPF.judet if contract.vanzatorPF else contract.vanzatorPJ.Judet }}</strong> </p>
+                <p>Cod IBAN: .....................................................</p>
+                <p>Banca: .....................................................</p>
+            </div>
+            <div class="center">
+                <p>Seria</p>
+                <p>Nr. ................................</p>
+                <h2>FACTURĂ</h2>
+                <p>Nr. facturii: .....................................................</p>
+                <p>Data (ziua, luna, anul): .....................................................</p>
+                <p>Nr. aviz însoțire a mărfii: .....................................................</p>
+                <p>(dacă este cazul)</p>
+            </div>
+            <div>
+                <p>Cumpărător: {{ contract.cumparatorPF.nume if contract.cumparatorPF else contract.cumparatorPJ.Nume }}</p>
+                <p>(denumire, formă juridică)</p>
+                <p>Nr.ord.reg.com/an: .....................................................</p>
+                <p>C.I.F: {{ contract.cumparatorPF.CNP if contract.cumparatorPF else contract.cumparatorPJ.CUI }}</p>
+                <p>Sediul: {{ contract.cumparatorPF.strada if contract.cumparatorPF else contract.cumparatorPJ.Strada }} nr. {{ contract.cumparatorPF.numar if contract.cumparatorPF else contract.cumparatorPJ.Numar }}</p>
+                <p>Județul: {{ contract.cumparatorPF.judet if contract.cumparatorPF else contract.cumparatorPJ.Judet }}</p>
+                <p>Cod IBAN: .....................................................</p>
+                <p>Banca: .....................................................</p>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nr. crt.</th>
+                    <th>Denumirea produselor sau a serviciilor marca {{ contract.autoturism.marca }}, model {{ contract.autoturism.model }}, număr de identificare {{ contract.autoturism.serieCaroserie }}, serie motor {{ contract.autoturism.serieMotor }}</th>
+                    <th>U.M.</th>
+                    <th>Cantitatea</th>
+                    <th>Prețul unitar {{ contract.valoareaContractului }} -lei- </th>
+                    <th>Valoarea {{ valInNumere }} -lei-</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="footer">
+            <div>
+                <p>Semnătura și ștampila furnizorului</p>
+                <p>.....................................................</p>
+                <p>Date privind expediția</p>
+                <p>.....................................................</p>
+                <p>Numele delegatului: .....................................................</p>
+                <p>B.I./C.I. seria ......... nr. .......... eliberat(ă) ..............................</p>
+                <p>Mijlocul de transport nr. .....................................................</p>
+                <p>Expedierea s-a efectuat în prezența noastră la data de ............................ ora .....................</p>
+                <p>Semnăturile</p>
+                <p>.....................................................</p>
+            </div>
+            <div class="center">
+                <p>Total din care:</p>
+                <p>.....................................................</p>
+                <p>Accize .....................................................</p>
+                <p>Semnătura de primire</p>
+                <p>.....................................................</p>
+                <p>Data de primire</p>
+                <p>.....................................................</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

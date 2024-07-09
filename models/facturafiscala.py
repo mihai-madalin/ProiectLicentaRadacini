@@ -6,15 +6,14 @@ class FacturaFiscala(db.Model):
     NumarFactura = db.Column(db.Integer, primary_key=True)
     SerieFactura = db.Column(db.Integer, primary_key=True)
     ResponsabilIntocmire = db.Column(db.Integer, db.ForeignKey('utilizatori.codUtilizator'))
-    codClientPersoanaJuridica = db.Column(db.Date, nullable=False)
+    codCumparatorPersoanaJuridica = db.Column(db.Integer, db.ForeignKey('clientipersoanejuridice.codClientPJ'))
     DataFacturi = db.Column(db.Date, nullable=False)
 
-    def __init__(self, NumarFactura, SerieFactura, ResponsabilIntocmire, codClientPersoanaJuridica, DataFacturi):
-        self.NumarFactura = NumarFactura
+    def __init__(self, SerieFactura, ResponsabilIntocmire, DataFacturi, codCumparatorPersoanaJuridica):
         self.SerieFactura = SerieFactura
         self.ResponsabilIntocmire = ResponsabilIntocmire
-        self.codClientPersoanaJuridica = codClientPersoanaJuridica
         self.DataFacturi = DataFacturi
+        self.codCumparatorPersoanaJuridica = codCumparatorPersoanaJuridica
 
     @property
     def serialize(self):

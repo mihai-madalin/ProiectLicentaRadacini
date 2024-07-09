@@ -11,7 +11,7 @@ from blueprints.categorie_teste import categorieteste_bp
 from blueprints.inspectii import inspectii_bp
 from blueprints.oferte import oferte_vanzare_bp
 from blueprints.contracte import contracts_bp
-
+from blueprints.factura import facturi_bp
 from models.utilizatori import Utilizator
 
 app = Flask(__name__)
@@ -35,6 +35,7 @@ app.register_blueprint(categorieteste_bp, url_prefix='/categorie-teste')
 app.register_blueprint(inspectii_bp, url_prefix='/inspectii')
 app.register_blueprint(oferte_vanzare_bp, url_prefix='/oferte')
 app.register_blueprint(contracts_bp, url_prefix='/contracte')
+app.register_blueprint(facturi_bp, url_prefix='/factura' )
 
 @app.route("/")
 def homePage():

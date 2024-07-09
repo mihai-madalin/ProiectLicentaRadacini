@@ -1,0 +1,41 @@
+{% extends "/components/base_user.html" %}
+{% block title %}Creează Factura{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Creează Factura</h2>
+    <form method="POST">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="codAutoturism" class="form-label">Autoturism</label>
+                <select id="codAutoturism" name="codAutoturism" class="form-select">
+                    {% for autoturism in autoturisme %}
+                    <option value="{{ autoturism.codAutoturism }}">{{ autoturism.marca }} - {{ autoturism.model }} - {{ autoturism.numarInmatriculare }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="valoareaContractului" class="form-label">Valoarea Factura</label>
+                <input type="number" id="valoareaContractului" name="valoareaContractului" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codOferta" class="form-label">Ofertă</label>
+                <select id="codOferta" name="codOferta" class="form-select">
+                    {% for oferta in oferte %}
+                    <option value="{{ oferta.codOferta }}">Oferta #{{ oferta.codOferta }} valoarea {{oferta.pret}} €</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="codInternCumparatorPersoanaJuridica" class="form-label">Cumpărător Persoană Juridică</label>
+                <select id="codClientPersoanaJuridica" name="codClientPersoanaJuridica" class="form-select">
+                    <option value="" selected>N/A</option>
+                    {% for client in clienti_persoane_juridice %}
+                    <option value="{{ client.codClientPJ }}">{{ client.Nume }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvează</button>
+    </form>
+</div>
+{% endblock %}
