@@ -4,6 +4,7 @@
 <div class="container mt-4">
     <h2 class="my-4">Lista Programari</h2>
     <a href="{{ url_for('programari.create_programare') }}" class="btn btn-primary mb-3">Adaugă Programare</a>
+    {{ numarpgvizionare }}
     <table class="table table-bordered" id="lista">
         <thead>
             <tr>
@@ -21,7 +22,7 @@
             {% for programare in programari %}
             <tr>
                 <td>{{ programare.codProgramare }}</td>
-               
+                
                     <td>
                         {% if programare.tipProgramre == 1 %}
                         <a href="{{url_for('programari.edit_programare', programare_id=programare.codProgramare)}}">Programare Vizionare Mașină</a>
@@ -29,7 +30,7 @@
                         <a href="{{url_for('programari.edit_programare', programare_id=programare.codProgramare)}}">  Programare Inspecție Mașină </a>
                         {% endif %}
                     </td>
-               
+                
                 <td>{{ programare.dataProgramare }}</td>
                 <td>{{ programare.autoturism.numarInmatriculare }}</td>
                 <td>

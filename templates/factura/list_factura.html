@@ -1,15 +1,15 @@
-% extends "/components/base_user.html" %}
+{% extends "/components/base_user.html" %}
 {% block title %}Factura{% endblock %}
 {% block content %}
 <div class="container mt-4">
     <h2 class="my-4">Lista Facturii</h2>
-    <a href="{{ url_for('facturi.create_factura') }}" class="btn btn-primary mb-3">Creează Factura</a>
-    <table class="table table-bordered">
+    <a href="{{ url_for('factura_bp.create_factura') }}" class="btn btn-primary mb-3" >Creează Factura</a>
+    <table class="table table-bordered" id="lista">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Tip</th>
-                <th>Autoturism</th>
+                <th>Numar</th>
+                <th>Serie</th>
+                <th>Cumparator</th>
                 <th>Valoare</th>
                 <th>Acțiuni</th>
             </tr>
@@ -17,12 +17,12 @@
         <tbody>
             {% for Factura in facturi %}
             <tr>
-                <td>{{ contract.codInternContract }}</td>
-                <td>{{ 'Vanzare' if not contract.vandutDeRadacini else 'Achizitie' }}</td>
-                <td>{{ contract.autoturism.marca }} - {{ contract.autoturism.model }} - {{ contract.autoturism.numarInmatriculare }}</td>
-                <td>{{ contract.valoareaContractului }}</td>
+                <td>{{ Factura.NumarFactura }}</td>
+                <td>{{ Factura.SerieFactura }}</td>
+                <td> CLIENT</td>
+                <td>{{ Factura.valoareaContractului }}</td>
                 <td>
-                    <a href="{{ url_for('facturi.generate_facturi', codInternContract=contract.codInternContract) }}" class="btn btn-success btn-sm">Generează Factura</a>
+                    <a href="{{ url_for('factura_bp.generate_facturi', codInternFactura=Factura.NumarFactura) }}" class="btn btn-success btn-sm">Generează Factura</a>
                 </td>
             </tr>
             {% endfor %}

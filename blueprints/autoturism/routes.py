@@ -97,7 +97,12 @@ def allowed_file(filename):
 @login_required
 def list_autoturism():
     autoturisme = Autoturism.query.all()
-    return render_template("autoturism/list_autoturism.html", autoturisme=autoturisme)
+
+    NUMAR_TOTAL_KM = 0
+    for masini in autoturisme:
+        NUMAR_TOTAL_KM = NUMAR_TOTAL_KM + masini.valoareOdometru
+
+    return render_template("autoturism/list_autoturism.html", autoturisme=autoturisme, numarKM = NUMAR_TOTAL_KM)
 
 @autoturism_bp.route("/view/<int:autoturism_id>", methods=["GET"])
 @login_required
@@ -160,7 +165,7 @@ def view_autoturism(autoturism_id):
 #    return redirect(url_for("autoturism.list_autoturism"))
 
 
-                #adr chat gpt
+                #adr
 @autoturism_bp.route("/delete/<int:autoturism_id>", methods=["POST"])
 @login_required
 def delete_autoturism(autoturism_id):

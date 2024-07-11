@@ -9,7 +9,8 @@ class FacturaFiscala(db.Model):
     codCumparatorPersoanaJuridica = db.Column(db.Integer, db.ForeignKey('clientipersoanejuridice.codClientPJ'))
     DataFacturi = db.Column(db.Date, nullable=False)
 
-    def __init__(self, SerieFactura, ResponsabilIntocmire, DataFacturi, codCumparatorPersoanaJuridica):
+    def __init__(self,NumarFactura, SerieFactura, ResponsabilIntocmire, DataFacturi, codCumparatorPersoanaJuridica):
+        self.NumarFactura = NumarFactura
         self.SerieFactura = SerieFactura
         self.ResponsabilIntocmire = ResponsabilIntocmire
         self.DataFacturi = DataFacturi

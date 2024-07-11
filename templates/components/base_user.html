@@ -103,6 +103,9 @@
                             <a class="dropdown-item dropdown-toggle" href="#">Teste Inspectie</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ url_for('teste.list_teste') }}">Lista Teste Inspectie</a></li>
+                                {% if current_user.rol == 2 %}
+                                    <li><a class="dropdown-item" href="{{ url_for('inspectii.list_inspectii') }}">Lista inspectii</a></li>
+                                {% endif %}
                             </ul>
                         </li>
                         <li class="dropdown-submenu">
@@ -167,9 +170,9 @@
                     </div>
 
                     <div class="col mb-3">
-                        <h5>Section</h5>
+                        <h5>Documentatii dezvoltare</h5>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                            <li class="nav-item mb-2"><a href="https://getbootstrap.com/docs/5.2/components/buttons/" class="nav-link p-0 text-body-secondary">Bootstrap</a></li>
                             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
                             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
                             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>

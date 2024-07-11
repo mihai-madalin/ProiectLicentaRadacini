@@ -25,7 +25,26 @@ def list_programari():
             programare.client = ClientPersoanaJuridica.query.get(programare.codClientPersoanaJuridica)
         programare.responsabil = Utilizator.query.get(programare.codResponsabilIntocmire)
     
-    return render_template('programari/list_programari.html', programari=programari)
+    contor = 0
+
+    NUMAR_TOTAL_KM = 0
+    # Pentru a afisa valorile dintr-un obiect 
+
+
+    # Am 10 masini cu cate un anumit numar x de KM
+    # colectia este masini
+
+    # Variabila in care stochez numarul total de km este NR_TOTAL_KM
+
+    # for masina in masini:
+    #     NUMAR_TOTAL_KM = NUMAR_TOTAL_KM + masina.valoareOdometru
+
+
+    for iterator in programari:
+        contor = contor +1
+    
+    numarpgvizionare = contor
+    return render_template('programari/list_programari.html', programari=programari, numarpgvizionare=numarpgvizionare)
 
 @programari_bp.route('/create', methods=['GET', 'POST'])
 @login_required
@@ -64,7 +83,7 @@ def create_programare():
         db.session.commit()
         flash('Programare created successfully!', 'success')
         return redirect(url_for('programari.list_programari'))
-
+    
     return render_template('programari/create_programare.html', autoturisme=autoturisme, clienti_persoane_fizice=clienti_persoane_fizice, clienti_persoane_juridice=clienti_persoane_juridice)
 
 @programari_bp.route('/edit/<int:programare_id>', methods=['GET', 'POST'])

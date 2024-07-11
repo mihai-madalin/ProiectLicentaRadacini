@@ -3,43 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice</title>
+    <title>Factura Fiscala</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            padding: 20px;
             background-color: #f8f9fa;
         }
         .invoice {
-            width: 800px;
+            max-width: 800px;
+            margin: 0 auto;
             background: #fff;
             padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .invoice table {
+        .invoice-header, .invoice-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .invoice-header div, .invoice-footer div {
+            flex: 1;
+        }
+        .invoice-header div:nth-child(2), .invoice-footer div:nth-child(2) {
+            text-align: center;
+        }
+        .invoice-header div:last-child, .invoice-footer div:last-child {
+            text-align: right;
+        }
+        .invoice-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .invoice-title h2 {
+            margin: 0;
+        }
+        table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
-        .invoice table, .invoice th, .invoice td {
-            border: 1px solid #000;
+        table, th, td {
+            border: 1px solid #ddd;
         }
-        .invoice th, .invoice td {
-            padding: 8px;
+        th, td {
+            padding: 10px;
             text-align: left;
-        }
-        .header, .footer {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-        }
-        .header div, .footer div {
-            width: 48%;
         }
         .center {
             text-align: center;
@@ -48,19 +60,19 @@
 </head>
 <body>
     <div class="invoice">
-        <div class="header">
+        <div class="invoice-header">
             <div>
-                <p>Furnizor: <strong>{{(contract.vanzatorPF.nume  + ' ' + contract.vanzatorPF.prenume) if contract.vanzatorPF else (contract.vanzatorPJ.Nume  )}}</strong></p>
-                <p>Nr.ord.reg.com/an: .....................................................</p>
-                <p>C.I.F:<strong>{{ contract.vanzatorPF.CNP if contract.vanzatorPF else contract.vanzatorPJ.CUI }}</strong></p>
-                <p>Sediul:<strong>{{ contract.vanzatorPF.oras if contract.vanzatorPF else contract.vanzatorPJ.Oras }}</strong></p>
-                <p>Județul:<strong>{{ contract.vanzatorPF.judet if contract.vanzatorPF else contract.vanzatorPJ.Judet }}</strong> </p>
-                <p>Cod IBAN: .....................................................</p>
-                <p>Banca: .....................................................</p>
+                <p><strong>Furnizor:</strong> RADACINI MOTORS SRL</p>
+                <p>Nr.ord.reg.com/an: J40/21994/2004</p>
+                <p>C.I.F: RO 17083558</p>
+                <p>Sediul: Bucuresti, Bd Timisoara nr 18</p>
+                <p>Județul: Timisioara</p>
+                <p>Phone: +40 737-600-600</p>
+                <p>Email: inspectii@radacini.ro</p>
             </div>
-            <div class="center">
-                <p>Seria</p>
-                <p>Nr. ................................</p>
+            <div>
+                <p><strong>Seria:</strong> {{FacturaFiscala.SerieFactura}}</p>
+                <p><strong>Nr.:</strong> ................................</p>
                 <h2>FACTURĂ</h2>
                 <p>Nr. facturii: .....................................................</p>
                 <p>Data (ziua, luna, anul): .....................................................</p>
@@ -68,41 +80,41 @@
                 <p>(dacă este cazul)</p>
             </div>
             <div>
-                <p>Cumpărător: {{ contract.cumparatorPF.nume if contract.cumparatorPF else contract.cumparatorPJ.Nume }}</p>
+                <p><strong>Cumpărător:</strong> {{ client.nume }}</p>
                 <p>(denumire, formă juridică)</p>
-                <p>Nr.ord.reg.com/an: .....................................................</p>
-                <p>C.I.F: {{ contract.cumparatorPF.CNP if contract.cumparatorPF else contract.cumparatorPJ.CUI }}</p>
-                <p>Sediul: {{ contract.cumparatorPF.strada if contract.cumparatorPF else contract.cumparatorPJ.Strada }} nr. {{ contract.cumparatorPF.numar if contract.cumparatorPF else contract.cumparatorPJ.Numar }}</p>
-                <p>Județul: {{ contract.cumparatorPF.judet if contract.cumparatorPF else contract.cumparatorPJ.Judet }}</p>
+                <p>Nr.ord.reg.com/an: {{client.NumarRegistrulComertului}}</p>
+                <p>C.I.F: {{client.CUI}}</p>
+                <p>Sediul: {{ client.strada }} nr. {{ client.numar }}</p>
+                <p>Județul: {{ client.judet }}</p>
                 <p>Cod IBAN: .....................................................</p>
                 <p>Banca: .....................................................</p>
             </div>
         </div>
+
         <table>
             <thead>
                 <tr>
-                    <th>Nr. crt.</th>
-                    <th>Denumirea produselor sau a serviciilor marca {{ contract.autoturism.marca }}, model {{ contract.autoturism.model }}, număr de identificare {{ contract.autoturism.serieCaroserie }}, serie motor {{ contract.autoturism.serieMotor }}</th>
-                    <th>U.M.</th>
-                    <th>Cantitatea</th>
-                    <th>Prețul unitar {{ contract.valoareaContractului }} -lei- </th>
-                    <th>Valoarea {{ valInNumere }} -lei-</th>
+                    <th>Denumire Articol</th>
+                    <th>Cantitate</th>
+                    <th>Pret Unitar</th>
+                    <th>Valoare</th>
                 </tr>
             </thead>
             <tbody>
+                {% for element in elementeFactura %}
                 <tr>
-                    <td>0</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{element.DenumireArticol}}</td>
+                    <td>{{element.Cantiate}}</td>
+                    <td>{{element.PretUnitar}}</td>
+                    <td>{{element.Cantiate * element.PretUnitar}}</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
-        <div class="footer">
+
+        <div class="invoice-footer">
             <div>
-                <p>Semnătura și ștampila furnizorului</p>
+                <p><strong>Semnătura și ștampila furnizorului</strong></p>
                 <p>.....................................................</p>
                 <p>Date privind expediția</p>
                 <p>.....................................................</p>
@@ -113,8 +125,8 @@
                 <p>Semnăturile</p>
                 <p>.....................................................</p>
             </div>
-            <div class="center">
-                <p>Total din care:</p>
+            <div>
+                <p><strong>Total din care:</strong></p>
                 <p>.....................................................</p>
                 <p>Accize .....................................................</p>
                 <p>Semnătura de primire</p>

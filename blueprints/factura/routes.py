@@ -1,5 +1,6 @@
 from datetime import date
-from flask import Flask, render_template, request, redirect, url_for
+import os
+from flask import Flask, render_template, request, redirect, send_file, url_for
 from flask_login import current_user, login_required
 from db import db
 from models.autoturism import Autoturism
@@ -8,7 +9,11 @@ from models.ofertevanzare import OfertaVanzare
 from . import facturi_bp
 from models.facturafiscala import FacturaFiscala 
 from models.componentefactura import ComponenteFactura
+import pdfkit
+from num2words import num2words
+from sqlalchemy import func
 
+SERIE_FACTURA = "VANZARI"
 
 @facturi_bp.route('/create_factura', methods=['GET', 'POST'])
 @login_required
@@ -33,10 +38,13 @@ def create_factura():
 
         # PREIA DIN FORMULARUL POST CAMPUL codClientPersoanaJuridica
         codClientPersoanaJuridica = request.form['codClientPersoanaJuridica']
-        
+        facturi = FacturaFiscala.query.all()
+
+
         # Crează factura
         factura = FacturaFiscala(
-            SerieFactura="VANZARI",
+            NumarFactura= (len(facturi) + 1),
+            SerieFactura=SERIE_FACTURA,
             ResponsabilIntocmire=current_user.codUtilizator,
             # SETEAZA VALOAREA CTOR cu VALOAREA EXTRASA IN VAR codClientPersoanaJuridica
             codCumparatorPersoanaJuridica=codClientPersoanaJuridica,
@@ -45,25 +53,58 @@ def create_factura():
         db.session.add(factura)
         db.session.commit()
 
-        # Extrage componentele
-        codInternContract_list = request.form.getlist('codInternContract[]')
-        DenumireArticol_list = request.form.getlist('DenumireArticol[]')
-        Cantiate_list = request.form.getlist('Cantiate[]')
-        PretUnitar_list = request.form.getlist('PretUnitar[]')
 
-        for i in range(len(codInternContract_list)):
-            componenta = ComponenteFactura(
-                NumarFactura=NumarFactura,
-                SerieFactura=SerieFactura,
-                codInternContract=codInternContract_list[i],
-                DenumireArticol=DenumireArticol_list[i],
-                Cantiate=Cantiate_list[i],
-                PretUnitar=PretUnitar_list[i]
-            )
-            db.session.add(componenta)
+        autoturism = Autoturism.query.get_or_404(request.form['codAutoturism'])
+        
+
+        componenta = ComponenteFactura(
+                NumarFactura=factura.NumarFactura,
+                SerieFactura=factura.SerieFactura,
+                codInternContract=1,
+                DenumireArticol=f'Autoturism {autoturism.marca} {autoturism.model} - An  {autoturism.AnulFabricatiei}  - {autoturism.valoareOdometru}',
+                Cantiate=1,
+                PretUnitar=request.form['valoareaContractului']
+                )
+        db.session.add(componenta)
 
         db.session.commit()
 
-        return redirect(url_for('homePage'))
+        return redirect(url_for('factura_bp.listaFacturi'))
 
     return render_template('factura/create_factura.html', autoturisme = autoturisme, clienti_persoane_juridice = pj, oferte=oferte )
+
+@facturi_bp.route('/generate_factura/<int:codInternFactura>', methods=['GET'])
+@login_required
+def generate_facturi(codInternFactura):
+    factura = FacturaFiscala.query.first_or_404([codInternFactura, SERIE_FACTURA])
+    client = ClientPersoanaJuridica.query.get_or_404(factura.codCumparatorPersoanaJuridica)
+
+    elementeFactura = ComponenteFactura.query.where(ComponenteFactura.NumarFactura == codInternFactura)
+
+    rendered_html = render_template(
+        'factura/factura.html',
+        FacturaFiscala=factura,
+        logo_url=url_for('static', filename='images/logo.jpg', _external=True) ,
+        client = client,
+        elementeFactura = elementeFactura,
+        # valInNumere= num2words(factura.valoareaContractului, lang='ro')
+        )
+
+    directory = 'C:\\Facturi'
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    pdf_file = pdfkit.from_string(rendered_html, False)
+
+    pdf_path = os.path.join(directory, f'FF-{SERIE_FACTURA}-{codInternFactura}.pdf')
+    with open(pdf_path, 'wb') as f:
+        f.write(pdf_file)
+
+    return send_file(pdf_path, as_attachment=True)
+
+
+@facturi_bp.route('/', methods=["GET"])
+@login_required
+def listaFacturi():
+    facturi = FacturaFiscala.query.all()
+    return render_template('factura/list_factura.html', facturi=facturi)
